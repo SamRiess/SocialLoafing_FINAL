@@ -12,7 +12,6 @@ lang: en
 authors:
   - name: "Samuel Riess"
     corresponding: true
-    orcid: "0000-0000-0000-0000"
     email: "Samuel.riess@campus.lmu.de"
     roles:
       - writing
@@ -21,13 +20,15 @@ authors:
       - id: "lmu"
         name: "Ludwig-Maximilians-Universität München, Munich, Germany"
         department: "Department of Psychology"
-        
+
+bibiography: Base_Literature/references.bib
 keywords: 
 - formalization 
 - Social impact theory 
 - social loafing
 
 abstract: "insert abstract here later on"
+bibliography: references.bib
 ---
 
 ```{r setup}
@@ -43,22 +44,22 @@ library(pwr) # for the power-Analysis
 source("simulation/01_base.R")
 ```
 
-# Introduction 
+# Introduction
 
-# Objective 
+# Objective
 
 # Core constructs
 
 # Identification of the relevant Phenomena
 
-# Formulation of the Theory 
+# Formulation of the Theory
 
-# The formal model 
+# The formal model
 
 ## Development of a formal model
 
-## Evaluation of the formal model 
+## Evaluation of the formal model
 
 # Discussion
 
-
+# References

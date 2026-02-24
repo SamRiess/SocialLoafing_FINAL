@@ -21,6 +21,44 @@ authors:
       - id: "lmu"
         name: "Ludwig-Maximilians-Universität München, Munich, Germany"
         department: "Department of Psychology"
+        
+keywords: 
+- formalization 
+- Social impact theory 
+- social loafing
+
+abstract: "insert abstract here later on"
 ---
+
+```{r setup}
+#| echo: false 
+#| include: false 
+
+# loading of the necessary packages 
+library(papaja) # for an automatically outut of results, p.e. apa_print()
+library(flextable) # for displaying tables in APA-Style 
+library(pwr) # for the power-Analysis 
+
+#if we source a R-document, it runs in advance and we get all created objects from that file aswell for that document/report
+source("simulation/01_base.R")
+```
+
+# Introduction 
+
+# Objective 
+
+# Core constructs
+
+# Identification of the relevant Phenomena
+
+# Formulation of the Theory 
+
+# The formal model 
+
+## Development of a formal model
+
+## Evaluation of the formal model 
+
+# Discussion
 
 

@@ -1,0 +1,26 @@
+---
+title: "SLoafing_Final"
+format:
+  apaquarto-pdf:
+    documentmode: man
+    a4paper: true
+    pdf-engine: lualatex
+    keep-tex: false
+editor: visual
+lang: en
+
+authors:
+  - name: "Samuel Riess"
+    corresponding: true
+    orcid: "0000-0000-0000-0000"
+    email: "Samuel.riess@campus.lmu.de"
+    roles:
+      - writing
+      - conceptualization
+    affiliations:
+      - id: "lmu"
+        name: "Ludwig-Maximilians-Universität München, Munich, Germany"
+        department: "Department of Psychology"
+---
+
+

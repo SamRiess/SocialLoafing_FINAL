@@ -18,4 +18,10 @@ Short guide throughout the folder structure:
   throughout the Quarto document
 You can ignore the rest of the files in the project folder,  for they necessary to run the other documents, but do not include extra information that is crucial for the report itself. 
 
+The final report can be seen in the pdf-file, that is rendered after running the whore Quarto document. It has the same name as the Quarto file, but with the appendix ".pdf". It should open
+autonomously after running the Quarto file. 
+
+The author information can be found in 2 places: 
+- The YAML Header of the Quarto document 
+- The Main Front page of the final .pdf file (the information from the YAML header goes straight here)
 

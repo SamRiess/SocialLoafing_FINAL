@@ -92,35 +92,40 @@ ggplot(plot_data_P, aes(x = CT, y = P)) +
 #' 
 #' @return (INC) incentive to give full effort. Ranges from 0 to 1 (continuous)
 
-get_INC <- function(CON) {
-  INC <- CON
+get_INC <- function(CON, LE) {
+  INC <- CON + 3 * CON * (1- CON) * (LE - CON)
   return(INC)
 }
 
-
 # (example) check vectorized form:
-INC <- get_INC(CON)
+LE <- c(0.9, 0.7, 0.5)
+INC <- get_INC(CON, LE)
 INC
 
 # (example) create data for CT 
 plot_data_INC <- expand.grid(
-  CON = CON
+  CON = CON,
+  LE = LE
 )
 
-# (example) compute the incentive from CT
+# (example) compute the incentive from CT and LE 
 plot_data_INC$INC <- get_INC(
-  CON = plot_data_INC$CON
+  CON = plot_data_INC$CON,
+  LE = plot_data_INC$LE
 )
+
+# (example) create an extra column for the plotting
+plot_data_INC$LE_label <- paste("EM condition:", plot_data_INC$LE)
 
 # (example) plot a visual graph for the t1-function
-ggplot(plot_data_CON, aes(x = CON, y = INC)) +
+ggplot(plot_data_INC, aes(x = CON, y = INC)) +
   geom_point(shape = 8) +
+  facet_wrap(~plot_data_INC$LE_label) +
   labs(title = "incentive to give full effort", y = "Incentive", x = "Contingency") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(CON, digits = 2))) +
   scale_y_continuous(limits = c(0, 1), breaks = c(round(INC, digits = 2))) +
   theme_bw() +
   geom_line()
-
 
 
 #' p3 compute the individual effort 
@@ -131,7 +136,7 @@ ggplot(plot_data_CON, aes(x = CON, y = INC)) +
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
 get_IE <- function(INC, P) {
-  IE <- 0.5 * INC + 0.5 * P
+  IE <- 0.8 * INC + 0.2 * P
   return(IE)
 }
 
@@ -174,10 +179,10 @@ ggplot(plot_data_IE, aes(x = INC, y = IE)) +
 #' 
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
-get_super_IE <- function(CT, S) {
+get_super_IE <- function(CT, S, LE) {
   CON <- get_CON(CT) 
   P <- get_P(CT, S)
-  INC <- get_INC(CON)
+  INC <- get_INC(CON, LE)
   IE <- get_IE(INC, P)
   IE <- IE + rnorm(1, mean = 0, sd = 0.3)
   IE[IE > 1] <- 1
@@ -237,8 +242,8 @@ ggplot(plot_data_IO, aes(x = MC, y = IO)) +
 #' 
 #' @return (IO) individual outcome. Ranges from 0 to inf (continuous)
 
-get_super_IO <- function(CT, S, MC){
-  IO <- get_super_IE(CT, S) * MC 
+get_super_IO <- function(CT, S, MC, LE){
+  IO <- get_super_IE(CT, S, LE) * MC 
   return (IO)
 }
 
@@ -274,7 +279,8 @@ n <- 36
 df <- expand.grid(
   id = 1:n, 
   CT = c(0, 1, 5),
-  S = c(1)
+  S = c(1),
+  LE = c(0.9, 0.7, 0.5) # HE, SLR, LE
 )
 
 # determine the variables for a simulation of the exogenous variables
@@ -298,36 +304,37 @@ df <- merge(df, max_per_person, by = "id")
 # compute the psychological outcome variable (IE)
 df$IE <- get_super_IE(
   CT = df$CT,
-  S = df$S
+  S = df$S, 
+  LE = df$LE
 )
 
 # compute the manifest outcome variable (IO)
 df$IO <- get_super_IO(
   CT = df$CT,
   S = df$S,
-  MC = df$maximum
+  MC = df$maximum, 
+  LE = df$LE
 )
 
 # look at the simulated data 
 # View(df)
 
 #compute the means of IO for each experimental group
-m0 <- mean(df$IO[df$CT == 0], na.rm = TRUE)
+data_final <- df %>%
+  group_by(CT, LE) %>%
+  summarise(means = mean(IO), .groups = "drop")
 
-m1 <- mean(df$IO[df$CT == 1], na.rm = TRUE)
 
-m5 <- mean(df$IO[df$CT == 5], na.rm = TRUE)
-
-data_final <- data.frame(
-  groups = c(0, 1, 5),
-  means = c(m0, m1, m5)
-)
-
-plot_final <- ggplot(data_final, aes(x = groups, y = means)) +
+plot_final <- ggplot(data_final, aes(x = CT, y = means, color = factor(LE))) +
   geom_point(shape = 8) +
-  labs(title = "Mean Individual Outcome (dyn/cm^2)", subtitle = "Dependent on experimental group (S = 1)", y = "Sound Pressure in dyn percm^2", x = "conditions (Number of Cotargets)") +
+  labs(
+    title = "Mean Individual Outcome (dyn/cm^2)", 
+    subtitle = "Dependent on experimental group (S = 1)", 
+    y = "Sound Pressure in dyn percm^2", 
+    x = "conditions (Number of Cotargets)",
+    color = "LE"
+  ) +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
-  scale_y_continuous(limits = c(0, m0), breaks = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)) +
   theme_bw() +
   geom_line()
 plot_final

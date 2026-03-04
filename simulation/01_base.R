@@ -257,6 +257,7 @@ get_super_IO <- function(CT, S, MC, LE){
 # As it is a deterministic (IS IT???) model, any virtual participant
 # will have on average the same individual effort based on 
 # the number of Cotargets (CT) and Sources of Social Pressure (S)
+# (note: more input Data is generated for we have LE as an predictor aswell, but this is only needed later on when we replicate Harkin's research)
 
 
 # Variability comes into the experiment by:
@@ -339,12 +340,15 @@ plot_final <- ggplot(data_final, aes(x = CT, y = means, color = factor(LE))) +
   geom_line()
 plot_final
 
-# Variance analysis
-df$CT_factor <- factor(df$CT,
+## Variance analysis for the replication of Latanße (1979)
+# we have to set the LE condition to 0.7, cause Effort Matching wasn't integrated in this paper
+df_Latane <- subset(df, LE == 0.7)
+
+df_Latane$CT_factor <- factor(df_Latane$CT,
                        levels = c(0,1,5),
                        labels = c("CT0","CT1","CT5"))
 
-fit_aov <- aov(IO ~ CT_factor, data = df)
+fit_aov <- aov(IO ~ CT_factor, data = df_Latane)
 
 hyp1 <- "CT1 - CT5 <= 0"
 hyp2 <- "CT0 - CT1 <= 0"
@@ -356,3 +360,36 @@ fit <- glht(fit_aov, linfct = kontraste)
 
 confint(fit, level = 0.95, calpha = univariate_calpha())
 summary(fit, test = univariate())
+
+
+##statistical Analysis for the replication of the Harkin Findings - comparison between groups of 1 and 2 persons, computated for every condition of LE alone
+
+# We use the same model as for the analysis of Latané et al, but now we're taking a closer look on the LE conditions and their effets
+# now we use all three conditions: the Number of Cotargets (CT), the Effort Matching condition 
+# (which transforms into LE) and the sources of social impact (this is still fixed to 1, cause it wasn't varied in this research either)
+
+# we replicate the table 1 of the Analysis and test, if the 3 pairs of conditions (Alone vs. Pair, for each of the three LE conditions)
+# create significant p-values
+
+
+# filter the data for each ANOVA
+df_LE  <- subset(df, LE == 0.5) # the low-effort expectation
+df_SLR <- subset(df, LE == 0.7) # the baseline condition without any signals for effort expectation
+df_HE  <- subset(df, LE == 0.9) # the high-effort expectation
+
+# define the factors that is need for our analysis
+df_LE$CT_factor  <- factor(df_LE$CT,  levels = c(0,1), labels = c("Alone","Pair"))
+df_SLR$CT_factor <- factor(df_SLR$CT, levels = c(0,1), labels = c("Alone","Pair"))
+df_HE$CT_factor  <- factor(df_HE$CT,  levels = c(0,1), labels = c("Alone","Pair"))
+
+# compute a t-Test for each ANOVA 
+fit_LE  <- aov(IO ~ CT_factor, data = df_LE)
+fit_SLR <- aov(IO ~ CT_factor, data = df_SLR)
+fit_HE  <- aov(IO ~ CT_factor, data = df_HE)
+
+glht(fit_LE,  linfct = mcp(CT_factor = "Pair - Alone <= 0"))
+glht(fit_SLR, linfct = mcp(CT_factor = "Pair - Alone <= 0"))
+glht(fit_HE,  linfct = mcp(CT_factor = "Pair - Alone <= 0"))
+
+
+

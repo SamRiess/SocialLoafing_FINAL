@@ -372,24 +372,21 @@ summary(fit, test = univariate())
 # create significant p-values
 
 
-# filter the data for each ANOVA
-df_LE  <- subset(df, LE == 0.5) # the low-effort expectation
-df_SLR <- subset(df, LE == 0.7) # the baseline condition without any signals for effort expectation
-df_HE  <- subset(df, LE == 0.9) # the high-effort expectation
+# prepare the data for the Harkings ANOVA
 
-# define the factors that is need for our analysis
-df_LE$CT_factor  <- factor(df_LE$CT,  levels = c(0,1), labels = c("Alone","Pair"))
-df_SLR$CT_factor <- factor(df_SLR$CT, levels = c(0,1), labels = c("Alone","Pair"))
-df_HE$CT_factor  <- factor(df_HE$CT,  levels = c(0,1), labels = c("Alone","Pair"))
+df_harkins <- subset(df, CT %in% c(0, 1))
 
-# compute a t-Test for each ANOVA 
-fit_LE  <- aov(IO ~ CT_factor, data = df_LE)
-fit_SLR <- aov(IO ~ CT_factor, data = df_SLR)
-fit_HE  <- aov(IO ~ CT_factor, data = df_HE)
+#define the CT-factor
+df_harkins$CT_factor <- factor(df_harkins$CT,
+                               levels = c(0, 1),
+                               labels = c("Alone", "Pair"))
 
-glht(fit_LE,  linfct = mcp(CT_factor = "Pair - Alone <= 0"))
-glht(fit_SLR, linfct = mcp(CT_factor = "Pair - Alone <= 0"))
-glht(fit_HE,  linfct = mcp(CT_factor = "Pair - Alone <= 0"))
+#define the LE-factor
+df_harkins$LE_factor <- factor(df_harkins$LE,
+                               levels = c(0.5, 0.7, 0.9),
+                               labels = c("Low", "SLR", "High"))
 
+fit_harkins <- aov(IO ~ CT_factor * LE_factor, data = df_harkins)
+summary(fit_harkins)
 
 

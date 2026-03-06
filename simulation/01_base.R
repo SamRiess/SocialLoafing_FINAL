@@ -92,6 +92,9 @@ ggplot(plot_data_P, aes(x = CT, y = P)) +
 #' 
 #' @return (INC) incentive to give full effort. Ranges from 0 to 1 (continuous)
 
+#define the social loafing replication condition
+LE_SLR <- 0.7
+
 get_INC <- function(CON, LE) {
   alpha <- ifelse(LE == LE_SLR, 0, 0.6)  # SLR: no Matching, Low/High: Matching
   INC <- CON + alpha * (LE - CON)

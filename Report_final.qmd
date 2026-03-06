@@ -48,36 +48,37 @@ source("simulation/01_base.R")
 
 # Objective
 
-In this report, we formalized an existing psychological theory to test the relation between the emerging phenomena, the data throughout a created model and the underlying theory. In the process, we compute simulated data for a fictionary experiment that is based on the original paper in which the described phenomena is mentioned. 
+In this report, we formalized an existing psychological theory to test the relation between the emerging phenomena and the correponding data throughout a created model and the underlying theory. In the process, we compute simulated data for a fictionary experiment that is based on the original paper in which the described phenomena is mentioned. We are mainly interested in the replication of important research that is associated with the phenomenon and proof that it exists or occurs in various situations.
+This is based on the replication crisis in psychology. Researchers have tried to replicate real, but old data in running many experiments and studies, but the link between a phenomenon and its underlying theory was rather investigated. With this report, we try to redirect the view on the three instances in asking other questions like "is the theory capable of producing the phenomenon in the first place?". 
 
-# Introduction of the theory
+# Introduction of the theory.
 
-We chose a theory out of social psychology, for that the emerged phenomena contains clearly observale variables, both input and output ones. The theory, named "social impact theory", first was mentioned in (hier Zitation eingügen). A few years later, the reaserchers published the paper (hier Zitation einfügen) in which the phenomena "social loafing" in mentioned. They based it on an experiment that is mentioned in (Zitation Ringelmann) and explained it with the social loafing theory. 
+We chose a theory out of social psychology, for that the emerged phenomena contains clearly observale variables, both input and output ones. The theory, named "social impact theory", first was mentioned in (hier Zitation eingügen). A few years later, the reaserchers published the paper (hier Zitation einfügen) in which the phenomena "social loafing" in mentioned. They based it on an experiment that is mentioned in (Zitation Ringelmann) and explained it with the social loafing theory.
 
 ## Core constructs
 
 For our Formalization, we need the core constructs wich are mentioned in the main paper. we orientated these at some citation we withdrawed directy from the text. We have our own label for each of these constructs, examined throughout these citations. Some constructs were specified differently over the whole original report, so we aimed to label them in a level that serves a greater interpretation. Of course, we have to mention that these labels are our own understanding of the constructs, further reseachers could focus on other elements.
 
-The theory presumes that... 
-All constructs and their sources can be seen in (Table 1).
+The theory presumes that... All constructs and their sources can be seen in (Table 1).
 
 ## Identification of the relevant Phenomena
 
 In (hier Zitation einfügen), the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". In the following sections, we aimed to create a link between this phenomena and out formalization of the social impact theory.
 
-# Method 
+# Method
 
 ## used software
 
-For simulation and computation of our final Data, we used R(hier Versionsnummer einfügen). Our graphic representation of the formalized theory was enabled throughout the application draw.io. 
- 
+Throughout our formalization, we use the Visual Argument Strucure Tool (VAST, citation VAST) to build a graphic visualization of the theory and resulting mechanisms. With this methodology, we are able to define realtionsships, out unterstanding of core constructs and the mechanisms that take place in the process of social loafing and effort matching. 
+For the computation of our simulated  Data, we used R(hier Versionsnummer einfügen). Our graphic representation of the formalized theory was enabled throughout the application draw.io in which we created our VAST model.
+
 ## Formalization of the Theory
 
-We used the VAST (Visual Argument Structure Tool) as a graphic form of formalization for our theory. Furhter information about the VAST and its application can be found in (hier Zitation einfügen). In the process, it was crucial to limit our scope, referring to both theory and phenomena. The main goal should be understandability, not the whole integrity of the full theory. 
+We used the VAST (Visual Argument Structure Tool) as a graphic form of formalization for our theory. Furhter information about the VAST and its application can be found in (hier Zitation einfügen). In the process, it was crucial to limit our scope, referring to both theory and phenomena. The main goal should be understandability, not the whole integrity of the full theory.
 
 ## Variables
 
-## Relationships 
+## Relationships
 
 # The formal model
 
@@ -86,8 +87,6 @@ We used the VAST (Visual Argument Structure Tool) as a graphic form of formaliza
 ## Testing the formal model
 
 ## Evaluation of the formal model
-
-
 
 # Discussion
 

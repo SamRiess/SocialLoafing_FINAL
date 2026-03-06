@@ -93,7 +93,10 @@ ggplot(plot_data_P, aes(x = CT, y = P)) +
 #' @return (INC) incentive to give full effort. Ranges from 0 to 1 (continuous)
 
 get_INC <- function(CON, LE) {
-  INC <- CON + 3 * CON * (1- CON) * (LE - CON)
+  alpha <- ifelse(LE == LE_SLR, 0, 0.6)  # SLR: no Matching, Low/High: Matching
+  INC <- CON + alpha * (LE - CON)
+  INC[INC < 0] <- 0
+  INC[INC > 1] <- 1
   return(INC)
 }
 

@@ -69,7 +69,10 @@ All constructs and their sources can be seen in (Table 1).
 
 ## Identification of the relevant Phenomena
 
-In (hier Zitation einfügen), the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". In the following sections, we aimed to create a link between this phenomena and out formalization of the social impact theory.
+In (hier Zitation einfügen), the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". In the following sections, we aimed to create a link between this phenomenon and our formalization of the social impact theory.
+
+To adress the robustness of our phenomena and therefore the good reason for investigating it further, we part it into two sections: Strength of evidence and Generalizability, using the UTOS framework (citation cronbach&Shapiro). We get our overview for both sections mentionend in this article by excerping the Meta-Analysis about social loafing by (citation Karau et al.). We found phrases like "Both laboratory exeriments and field studies have been conducted using a range of subject populations varying in age, gender, and culutre". This leads to the assumption that at least the setting (S) and the Units (U) were varied over the years, for the meta-analysis conducts about ... . Others phrases like "Several studies provided data for more than one relevant dependent variable" areleading towards a given generalizability for the dimension of Outcomes (O). At last, we found evidence The strehgth of evidene can be acknowledged cause the effect sizes are estimated using mean effect sizes that "differed significantly from the 0.00 value that indicates exatly no difference". 
+In the end, the phenomenon can be considered robust because the whole UTOS framework and the strength of evidence are supported with empirical data.
 
 # Method
 

@@ -123,6 +123,27 @@ ggplot(plot_data_INC, aes(x = CON, y = INC)) +
   geom_line()
 
 
+#' t3 transform the EMC condition into loafing expectation
+#' 
+#' @param EMC Effort condition. ordinal variable with the values "1, 2 or 3"
+#' 
+#' @return (LE) loafing expectation. ordinal variable with possible values as followed: 
+#' "match_low", "no_info", "match_high"
+
+get_LE <- function(EMC) {
+  LE <- case_match(EMC,
+                    1 ~ "match_low",
+                    2 ~ "no_info",
+                    3 ~ "match_high"
+  )
+  return(LE)
+}
+
+EMC <- c(1, 2, 3)
+
+LE <- get_LE(EMC)
+LE
+
 #' p3 compute the individual effort 
 #' 
 #' @param INC incentive to give full effort. Ranges from 0 to 1 (continuous)
@@ -302,8 +323,8 @@ n <- 36
 df <- expand.grid(
   id = 1:n, 
   CT = c(0, 1, 5),
-  S = c(1),
-  LE = c(0.9, 0.7, 0.5) # HE, SLR, LE
+  S = c(2),
+  EMC = c(1, 2, 3) # HE, SLR, LE
 )
 
 # determine the variables for a simulation of the exogenous variables

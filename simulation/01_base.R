@@ -33,7 +33,7 @@ plot_data_CON$CON <- get_CON(
 )
 
 # (example) plot a visual graph for the p1-function
-ggplot(plot_data_CON, aes(x = CT, y = CON)) +
+plot_p1 <- ggplot(plot_data_CON, aes(x = CT, y = CON)) +
   geom_point(shape = 8) +
   labs(title = "contingency between input and outcome", subtitle = "Dependent on Cotargets", y = "Contingency", x = "Number of Cotargets") +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
@@ -76,7 +76,7 @@ plot_data_P$P <- get_P(
 plot_data_P$S_label <- paste("Sources:", plot_data_P$S)
 
 # (example) plot a visual graph for the p2-function
-ggplot(plot_data_P, aes(x = CT, y = P)) +
+plot_p2 <-ggplot(plot_data_P, aes(x = CT, y = P)) +
   geom_point(shape = 8) +
   facet_wrap(~plot_data_P$S_label) +
   labs(title = "Pressure", subtitle = "Dependent on Cotargets", y = "Contingency (=Incentive)", x = "Number of Cotargets") +
@@ -114,7 +114,7 @@ plot_data_INC$INC <- get_INC(
   CON = plot_data_INC$CON
 )
 # (example) plot a visual graph for the t1-function
-ggplot(plot_data_INC, aes(x = CON, y = INC)) +
+plot_t1 <- ggplot(plot_data_INC, aes(x = CON, y = INC)) +
   geom_point(shape = 8) +
   labs(title = "incentive to give full effort", y = "Incentive", x = "Contingency") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(CON, digits = 2))) +
@@ -454,8 +454,17 @@ kontraste_harkins <- mcp(group = hyps_harkins)
 fit_final <- glht(fit_harkins_uni, linfct = kontraste_harkins)
 
 #show results
-summary(fit_final, test = univariate())
+summary_harkins <- summary(fit_final, test = univariate())
+p_values_harkins <- summary_harkins$test$pvalues
+
+p_low  <- p_values_harkins[1]
+p_slr  <- p_values_harkins[2]
+p_high <- p_values_harkins[3]
+
 confint(fit_final)
+
+
+
 
 
 

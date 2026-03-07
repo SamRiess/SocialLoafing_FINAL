@@ -80,13 +80,71 @@ We used the VAST (Visual Argument Structure Tool) as a graphic form of formaliza
 
 ## Relationships
 
+The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. 
+
+```{r}
+#| label: fig-p2
+#| fig-cap: "Plot for the relationsship p2"
+#| echo: false
+#| warning: false
+
+plot_p2
+
+```
+
+The relationship between Co-Targets and the contingency was rather intuitive, due to the specific function derived from the core report (citation Latané). It is presented in @fig-p1
+
+```{r}
+#| label: fig-p1
+#| fig-cap: "Plot for the relationsship p1"
+#| echo: false
+#| warning: false
+
+plot_p1
+```
+
+
+After that, the transformation for the Incentive can be represented by a proportional increase: incentive gets the same values as the previously computated contingency (@fig-t1). 
+
+```{r}
+#| label: fig-t1
+#| fig-cap: "Plot for the transformation t1"
+#| echo: false
+#| warning: false
+
+plot_t1
+```
+
+Things were getting more interesting with the function that computes the individual effort, using alle previously computated and simulated input variables. The plot can be viewed in 
+
+```{r}
+
+```
+
+
+
+
+
 # The formal model
 
 ## Development of a formal model
 
 ## Testing the formal model
 
+Finally, we got to test our model with our simulation. It turns out that both effects, on one side the social loafing but on the other side the elimination of this phenomenon throughout implementing a low and high Effort condition  was successful. The result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`.
+
+```{r}
+#| label: fig-final
+#| fig-cap: "Final plot of the simulation"
+#| echo: false
+#| warning: false
+
+plot_final
+```
+
+
 ## Evaluation of the formal model
+
 
 # Discussion
 

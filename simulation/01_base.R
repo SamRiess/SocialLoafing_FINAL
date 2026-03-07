@@ -11,7 +11,7 @@ library(multcomp)
 #' 
 #' @return (CON) contingency between input and outcome. Ranges from 0 to 1 (continuous)
 
-get_CON <- function(CT) {
+get_CON <- function(CT, LE) {
   n <- CT + 1
   CON <- 1/n
   return(CON)
@@ -93,40 +93,29 @@ ggplot(plot_data_P, aes(x = CT, y = P)) +
 #' @return (INC) incentive to give full effort. Ranges from 0 to 1 (continuous)
 
 #define the social loafing replication condition
-LE_SLR <- 0.7
 
-get_INC <- function(CON, LE) {
-  alpha <- ifelse(LE == LE_SLR, 0, 0.6)  # SLR: no Matching, Low/High: Matching
-  INC <- CON + alpha * (LE - CON)
-  INC[INC < 0] <- 0
-  INC[INC > 1] <- 1
+get_INC <- function(CON) {
+  INC = CON
   return(INC)
 }
 
+
 # (example) check vectorized form:
-LE <- c(0.9, 0.7, 0.5)
-INC <- get_INC(CON, LE)
+INC <- get_INC(CON)
 INC
 
 # (example) create data for CT 
 plot_data_INC <- expand.grid(
-  CON = CON,
-  LE = LE
+  CON = CON
 )
 
 # (example) compute the incentive from CT and LE 
 plot_data_INC$INC <- get_INC(
-  CON = plot_data_INC$CON,
-  LE = plot_data_INC$LE
+  CON = plot_data_INC$CON
 )
-
-# (example) create an extra column for the plotting
-plot_data_INC$LE_label <- paste("EM condition:", plot_data_INC$LE)
-
 # (example) plot a visual graph for the t1-function
 ggplot(plot_data_INC, aes(x = CON, y = INC)) +
   geom_point(shape = 8) +
-  facet_wrap(~plot_data_INC$LE_label) +
   labs(title = "incentive to give full effort", y = "Incentive", x = "Contingency") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(CON, digits = 2))) +
   scale_y_continuous(limits = c(0, 1), breaks = c(round(INC, digits = 2))) +
@@ -141,36 +130,63 @@ ggplot(plot_data_INC, aes(x = CON, y = INC)) +
 #' 
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
-get_IE <- function(INC, P) {
-  IE <- 0.8 * INC + 0.2 * P
-  return(IE)
+get_IE <- function(INC, P, LE) {
+  # 1. Die Social Loafing Baseline (Latané)
+  # Dieser Wert sinkt, wenn CT steigt
+  loafing_effort <- 0.5 * INC + 0.5 * P
+  
+  # 2. Die Effort Matching Logik
+  # Hier definieren wir feste Werte, die die Erwartung an die Einzelbedingung 
+  # der anderen widerspiegeln (unabhängig von der aktuellen Gruppengröße).
+  
+  final_IE <- case_when(
+    # Bedingung: Partner leistet in seiner Einzelbedingung viel
+    LE == "match_high" ~ 0.9, 
+    
+    # Bedingung: Partner leistet in seiner Einzelbedingung wenig
+    LE == "match_low"  ~ 0.4, 
+    
+    # In der no_info Bedingung greift das klassische Modell (Loafing)
+    LE == "no_info"    ~ loafing_effort,
+    
+    TRUE                ~ loafing_effort
+  )
+  
+  return(final_IE)
 }
 
 # (example) check vectorized form:
-IE <- get_IE(INC, P)
+LE <- c("match_high", "match_low", "no_info")
+IE <- get_IE(INC, P, LE)
 IE
 
 
 # (example) create data for INC and P
 plot_data_IE <- expand.grid(
   INC = INC,
-  P = P
+  P = P,
+  LE = c("match_high", "match_low", "no_info")
 )
 
 # (example) compute the individual effort from INC and P
 plot_data_IE$IE <- get_IE(
   INC = plot_data_IE$INC,
-  P = plot_data_IE$P
+  P = plot_data_IE$P, 
+  LE = plot_data_IE$LE
 )
 
 # (example) create an extra column for the plotting
 plot_data_IE$P_label <- paste("Pressure:", round(plot_data_IE$P, digits = 2))
 
 # (example) plot a visual graph for the p1-function
-ggplot(plot_data_IE, aes(x = INC, y = IE)) +
+ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
   geom_point(shape = 8) +
-  facet_wrap(~plot_data_IE$P_label) +
-  labs(title = "Individual effort", subtitle = "Dependent on Pressure + Incentive", y = "Individual effort", x = "Incentive") +
+  facet_wrap(~P_label) +
+  labs(title = "Individual effort", 
+       subtitle = "Dependent on Pressure + Incentive", 
+       y = "Individual effort", 
+       x = "Incentive", 
+       color = "Bedingung (LE)") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(INC, digits = 2))) +
   scale_y_continuous(limits = c(0, 1), breaks = c(round(IE, digits = 2))) +
   theme_bw() +
@@ -188,8 +204,8 @@ ggplot(plot_data_IE, aes(x = INC, y = IE)) +
 get_super_IE <- function(CT, S, LE) {
   CON <- get_CON(CT) 
   P <- get_P(CT, S)
-  INC <- get_INC(CON, LE)
-  IE <- get_IE(INC, P)
+  INC <- get_INC(CON)
+  IE <- get_IE(INC, P, LE)
   IE <- IE + rnorm(1, mean = 0, sd = 0.3)
   IE[IE > 1] <- 1
   IE[IE < 0] <- 0
@@ -211,7 +227,7 @@ get_IO <- function(MC, IE) {
 
 # (example) check vectorized form:
 MC <- c(9, 10, 13)
-IO <- get_IE(MC, IE)
+IO <- get_IO(MC, IE)
 IO
 
 # (example) create data for MC and IE
@@ -269,7 +285,7 @@ get_super_IO <- function(CT, S, MC, LE){
 # Variability comes into the experiment by:
 # (a) Different trait values for the maximum noise each person can produce
 # (b) Randomness from the noise we compute in the superfuncion - due to e.g. 
-#     faitque, personality, mental state etc.  during the experiment
+#     faitgue, personality, mental state etc.  during the experiment
 
 # You can run the script repeatedly to simulate new replication studies,
 # and observe the variability in outcomes due to sampling variability.

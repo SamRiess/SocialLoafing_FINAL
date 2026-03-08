@@ -85,7 +85,7 @@ plot_final <- ggplot(data_final, aes(x = CT, y = means, color = factor(EMC))) +
     color = "EMC"
   ) +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
-  theme_bw() +
+  theme_minimal() +
   geom_line()
 plot_final
 
@@ -117,6 +117,21 @@ fit <- glht(fit_aov, linfct = kontraste)
 confint(fit, level = 0.95, calpha = univariate_calpha())
 summary(fit, test = univariate())
 
+# descriptives: Boxplot
+boxplot_latane <- ggplot(df_Latane, aes(x = CT_factor, y = IO, fill = CT_factor)) +
+  geom_boxplot(outlier.color = "red", alpha = 0.7) +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") + # Zeigt den Mittelwert
+  labs(
+    title = "distribution of Individual Outcomes (replication Latané)",
+    subtitle = "Variability based on the CT-condition (EMC fixed to SLR)",
+    x = "number of Co-Targets",
+    y = "Sound Pressure (dyn/cm^2)"
+  ) +
+  theme_minimal() +
+  scale_fill_brewer(palette = "Set2") +
+  theme(legend.position = "none")
+
+boxplot_latane
 
 
 
@@ -173,10 +188,26 @@ fit_final_harkins <- glht(fit_harkins_uni, linfct = kontraste_harkins)
 summary_harkins <- summary(fit_final_harkins, test = univariate())
 p_values_harkins <- summary_harkins$test$pvalues
 
-# extract 
+# extract the p-values
 p_low  <- p_values_harkins[1]
 p_slr  <- p_values_harkins[2]
 p_high <- p_values_harkins[3]
 
 # execute a confidence interval for Harkins & Jackson (1985)
-confint(fit_final_harkins)
+confint_harkins <- confint(fit_final_harkins)
+
+#descriptives: Boxplot 
+boxplot_harkins <- ggplot(df_harkins, aes(x = EMC_factor, y = IO, fill = CT_factor)) +
+  geom_boxplot(alpha = 0.8) +
+  labs(
+    title = "Individual Outcome: Alone vs. Pair, grouped by EMC-condition",
+    subtitle = "replication Jackson & Harkins (1985)",
+    x = "Effort Matching Condition (EMC)",
+    y = "Sound Pressure (dyn/cm^2)",
+    fill = "condition"
+  ) +
+  theme_minimal() +
+  scale_fill_manual(values = c("Alone" = "#69b3a2", "Pair" = "#404080")) +
+  theme(legend.position = "top")
+
+boxplot_harkins

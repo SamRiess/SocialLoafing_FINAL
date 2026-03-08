@@ -108,6 +108,37 @@ mechanism}
 \ifnextchar[{\eatarg}{}
 
 
+\caption{\label{fig-box1}Boxplot for the replication of Latané}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{Report_final_files/figure-pdf/fig-box1-1.pdf}}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-box2}Boxplot for the replication of Jackson \&
+Harkins}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{Report_final_files/figure-pdf/fig-box2-1.pdf}}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
 \caption{\label{fig-final}Final plot of the simulation}
 
 \centering{

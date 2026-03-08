@@ -146,9 +146,36 @@ plot_t2
 
 The variables for each of our constructs, if shown in our VAST, can be seen in (Tabelle einfügen).
 
-## Testing the formal model
+## Evaluation of the formal model
 
-Finally, we got to test our model with our simulation. It turns out that both effects, on one side the social loafing but on the other side the elimination of this phenomenon throughout implementing a low and high Effort condition was successful. The result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`.
+Finally, we got to test our model with our simulation. We simulated the original experiment for social loafing, using the sound pressure as the individual outcome [@latane1979] but added one more predictor: the EMC. With a sample size of n=36 (view [@latane1979], we were able to test for the original effect and the effort matching mechanism together. 
+The descriptives for both analyses are showcased in @fig-box1 and @fig-box2
+
+```{r}
+#| label: fig-box1
+#| fig-cap: "Boxplot for the replication of Latané"
+#| echo: false
+#| warning: false
+
+boxplot_latane
+```
+
+```{r}
+#| label: fig-box2
+#| fig-cap: "Boxplot for the replication of Jackson & Harkins"
+#| echo: false
+#| warning: false
+
+boxplot_harkins
+```
+
+```{r}
+#prepare the ANOVA of Latané for the final result part
+latane_anova <- apa_print(fit_aov)
+```
+
+
+It turns out that both effects, on one side the social loafing but on the other side the elimination of this phenomenon throughout implementing a low and high Effort condition was successful. The result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`. For our main replication, the number of Co-Targets had a significant effect on the individual sound output `r latane_anova$full_result$CT_factor`.
 
 ```{r}
 #| label: fig-final
@@ -159,9 +186,7 @@ Finally, we got to test our model with our simulation. It turns out that both ef
 plot_final
 ```
 
-## Evaluation of the formal model
-
-# Discussion
+# Meta-reflection
 
 # References
 

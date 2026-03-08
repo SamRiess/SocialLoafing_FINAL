@@ -49,32 +49,33 @@ source("simulation/02_simulation.R")
 
 # Objective
 
-In this report, we formalize an existing psychological theory to test the relation between the emerging phenomena and the corresponding data by means of a computational model, based on the underlying theory. Following the methodological framework outlined by Borsdoom ([@borsboom2021]), we generate simulated data for a fictional experiment inspired by the original study in which the phenomenon was first described. We are mainly interested in replicating key empirical findings associated with the phenomenon and to demonstrate that the model is capable of reproducing the phenomenon across different hypothetical scenarios. The need for such work is grounded in broader concerns within psychological science, known under terms like "reproducibility crisis" (citation Borsboom). Hence, our aim is to take a closer look at the relationship between the underlying theory and the emerging phenomenon, evaluating how well the theoretical assumptions can account for the observed effects.
+In this report, we formalize an existing psychological theory to test the relation between the emerging phenomena and the corresponding data by means of a computational model, based on the underlying theory. Following the methodological framework outlined by Borsdoom [@borsboom2021], we generate simulated data for a fictional experiment inspired by the original study in which the phenomenon was first described. We are mainly interested in replicating key empirical findings associated with the phenomenon and to demonstrate that the model is capable of reproducing the phenomenon across different hypothetical scenarios. The need for such work is grounded in broader concerns within psychological science, known under terms like "reproducibility crisis" (citation Borsboom). Hence, our aim is to take a closer look at the relationship between the underlying theory and the emerging phenomenon, evaluating how well the theoretical assumptions can account for the observed effects.
 
-# Introduction of the theory.
+# Introduction of the theory
 
-We chose a social psychology theory for that the emerged phenomena contains clearly observable variables, both input and output ones. The theory, named "social impact theory", was first mentioned in 1973 (citation Latané 1973), but the large framework with all supposed mechanisms and effects was published a few years later (citation Latané theory Hauptpaper). Between these publications, Latané published "Many Hands Make Light The Work: The Causes and Consequences of Social Loafing" in which the term "social loafing" was first defined. There, they tried to explain it using the first approaches of social loafing theory. For adding more depth to the phenomenon we are referring to an underlying mechanism, named "Effort Matching".
+We chose a social psychology theory for that the emerged phenomena contains clearly observable variables, both input and output ones. The theory, named "social impact theory", was first mentioned in 1973, but the large framework with all supposed mechanisms and effects was published 8 years later [@latané1981]. Between these publications, Latané published "Many Hands Make Light The Work: The Causes and Consequences of Social Loafing" in which the term "social loafing" was first defined. There, they tried to explain it using the first approaches of social loafing theory. For adding more depth to the phenomenon we are referring to an extending mechanism, named "Effort Matching" [@jackson1985].
 
 ## Core constructs
 
 Our formalization is grounded on some core constructs. These are orientated at citations we withdrawed directly from the existing research. Some constructs were specified differently over the whole report, so we aimed to label them in a way that serves a greater interpretation. Of course, these labels are our own understanding of the constructs, further reseachers could focus on other elements. Furthermore, the scope is strongly limited to the main social loafing research, we only differ if there's some special need or cause for it.
 
-All constructs and their sources can be seen in (Table 1).
+All constructs and their sources can be seen in (Table 1), our VAST model contains them in a connected and graphic way to understand the underlying mechanism of the phenomenon. As one can see, the intial constructs that cause the effect are the Co-Targets and Sources of social impact, which are standing for group members and e.g. experimenters who supervise an experiment. The Effort matching condition (EMC) itself presents 3 experimental conditions: High effort, no information and low Effort. This construct isn't mentioned in @latané1979 and was therefore an extention
 
 ## Identification of the relevant Phenomena
 
-In (hier Zitation einfügen), the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". In the following sections, we aimed to create a link between this phenomenon and our formalization of the social impact theory. The phenomenon itself can be seen in @fig-vast.
+In [@latané1979], the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". The Effort Matching mechanism is defined in another reasearch, stating: "they will maintain equity by matching the effort levels they expect from their partners" [@jackson1985]. This was already discussed before [@latané1979] but further investigated in the newer report.
+
+To create a link between this phenomenon and our formalization of the social impact theory, we used our visual tool again. The resulting phenomenon itself can be seen in @fig-vast.
 
 ![Structure of the VAST phenomenon](doc/VAST_SocialLoafing_Phenomenon_image.png){#fig-vast fig-align="center" width="80%"}
 
-
-To adress the robustness of our phenomena and therefore the good reason for investigating it further, we part it into two sections: Strength of evidence and Generalizability, using the UTOS framework (citation cronbach&Shapiro). We get our overview for both sections mentionend in this article by excerping the Meta-Analysis about social loafing by (citation Karau et al.). We found phrases like "Both laboratory exeriments and field studies have been conducted using a range of subject populations varying in age, gender, and culutre". This leads to the assumption that at least the setting (S) and the Units (U) were varied over the years, for the meta-analysis conducts about ... . Others phrases like "Several studies provided data for more than one relevant dependent variable" areleading towards a given generalizability for the dimension of Outcomes (O). At last, we found evidence The strehgth of evidene can be acknowledged cause the effect sizes are estimated using mean effect sizes that "differed significantly from the 0.00 value that indicates exatly no difference". In the end, the phenomenon can be considered robust because the whole UTOS framework and the strength of evidence are supported with empirical data.
+To address the robustness of social loafing and therefore the good reason for investigating it further, we part it into two sections: Strength of evidence and Generalizability, using the UTOS framework (citation cronbach&Shapiro). We get our overview for both sections mentioned in this article by analyzing the Meta-Analysis about social loafing by [@karau1993]. We found phrases like "Both laboratory experiments and field studies have been conducted using a range of subject populations varying in age, gender, and culuture". This leads to the assumption that at least the setting (S) and the Units (U) were varied over the years, for the meta-analysis conducts about ... . Others phrases like "Several studies provided data for more than one relevant dependent variable" are leading towards a given generalizability for the dimension of Outcomes (O). At last, we found evidence The strength of evidence can be acknowledged cause the effect sizes are estimated using mean effect sizes that "differed significantly from the 0.00 value that indicates exactly no difference". In the end, the phenomenon can be considered robust because the whole UTOS framework and the strength of evidence are supported with empirical data.
 
 # Method
 
 ## used software
 
-Throughout our formalization, we use the Visual Argument Strucure Tool (VAST, citation VAST) to build a graphic visualization of the theory and resulting mechanisms. With this methodology, we are able to define realtionsships, out unterstanding of core constructs and the mechanisms that take place in the process of social loafing and effort matching. For the computation of our simulated Data, we used R(hier Versionsnummer einfügen). Our graphic representation of the formalized theory was enabled throughout the application draw.io in which we created our VAST model.
+Throughout our formalization, we use the Visual Argument Strucure Tool (VAST, [@leising2023]) to build a graphic visualization of the theory and resulting mechanisms. With this methodology, we are able to define relationships, out understanding of core constructs and the mechanisms that take place in the process of social loafing and effort matching. For the computation of our simulated Data, we used R(hier Versionsnummer einfügen). Our graphic representation of the formalized theory was enabled throughout the application draw.io in which we created our VAST model.
 
 ## Formalization of the Theory
 
@@ -139,12 +140,11 @@ The last isolated relationship we have to show is the transformation of IE and M
 plot_t2
 ```
 
-## the formal model 
+## the formal model
 
 ## Variables
 
-The variables for each of our constructs, if shown in our VAST, can be seen in (Tabelle mit Variablen).
-
+The variables for each of our constructs, if shown in our VAST, can be seen in (Tabelle einfügen).
 
 ## Testing the formal model
 

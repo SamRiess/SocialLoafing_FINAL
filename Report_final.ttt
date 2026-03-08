@@ -1,0 +1,79 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\caption{{Variables in the VAST}{\label{tbl-variables}}}
+\vspace{-20pt}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0467}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0778}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0545}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1518}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.6576}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Construct
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Source (if given)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Scale level
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Range/Value
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Anchors
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+CT & & discrete & ∈ \textbf{ℕ0} & 0 = ``zero cotargets are present'';
+
+n = ``number of cotargets (other persons in the evaluated group, number
+of group members minus 1)'' \\
+S & & discrete & ∈ \textbf{ℕ0} & ``0 = ``zero persons that cause the
+social pressure'';
+
+n = ``number of persons that cause the pressure'' \\
+P & & continuous & ∈ {[}0; 1{]} & 0 = ``zero persons are source of
+social pressure'', ``no social pressure''
+
+1 = ``maximal social pressure (a theoretical amount on infinite
+spectators are present)'' \\
+CON & & continuous & ∈ {[}0; 1{]} & 0 = ``expectation that the share
+(reward/punishment) of each member is completely independent of what
+they've given''
+
+1 = ``expectation that their share (reward/punishment) is equal to what
+they've~ given'' \\
+INC & & continuous & ∈ {[}0; 1{]} & 0 = ``no incentive to give any
+individual effort'' ;
+
+1 = ``incentive to give full effort'' \\
+IE & & continuous & ∈ {[}0; 1{]} & 0 = ``the person shows no effort at
+all to bring in some contribution to the group task'', 1 = ``the person
+shows their maximal effort in contributing to the group task'' \\
+IO & & continuous & ∈ {[}0; inf{[} & 0 = dynes/cm\^{}2
+
+n = dynes/cm\^{}2 \\
+MC & & continuous & ∈ \textbf{ℝ0} & depends on the task (clapping with
+hands, rope pulling) \\
+EMC & & ordinal & 1, 2 or 3 is possible & 1 = low effort condition,
+
+2 = Social loafing replication condition,
+
+3 = high effort condition \\
+LE & & ordinal & ``match\_low'', ``no\_info'', ``match\_high'' &
+``match\_low'' = the subject thinks the Co-Targets were giving their
+full effort in the practice trial,
+
+``no\_info'' = the subjects has no information whatsoever about the
+others goal in effort,
+
+``match\_high'' = the subject thinks the Co-Targets had not tried hard
+in the practice trial \\
+& & & & \\
+& & & & \\
+\end{longtable}
+
+\end{table*}

@@ -420,6 +420,7 @@ hyps <- c(hyp1, hyp2)
 
 kontraste <- mcp(CT_factor = hyps)
 
+#execute the ANOVA
 fit <- glht(fit_aov, linfct = kontraste)
 
 confint(fit, level = 0.95, calpha = univariate_calpha())
@@ -430,78 +431,7 @@ summary(fit, test = univariate())
 
 ## Replicate the original Study of Harkins & Jackson
 
-# set sample size of participants (we assume a within-person design)
-# derived  from experiment 2 - the pseudo-groups (Latané et al.)
-n <- 42
-
-# experimental design: Harkins & Jackson. (1985)
-# create data for CT, S and EMC too (now relevant for the analysis)
-
-df_harkins <- expand.grid(
-  id = 1:n, 
-  CT = c(0, 1),
-  S = c(2),
-  EMC = c(1, 2, 3) # LE, SLR, HE
-)
-
-# determine the variables for a simulation of the exogenous variables
-phi <- 5
-alpha <- 0.922*phi
-beta <- (1-0.922)*phi
-
-scale_factor <- 12.29 / 0.922
-
-# interindividual variability in exogenous variable ("maximum capacity")
-max_per_person <- data.frame(
-  id = 1:n,
-  maximum = scale_factor * rbeta(n, alpha, beta)
-)
-
-mean(max_per_person$maximum)
-
-# merge into df
-df_harkins <- merge(df_harkins, max_per_person, by = "id")
-
-# compute the psychological outcome variable (IE)
-df_harkins$IE <- get_super_IE(
-  CT = df_harkins$CT,
-  S = df_harkins$S, 
-  EMC = df_harkins$EMC
-)
-
-# compute the manifest outcome variable (IO)
-df_harkins$IO <- get_super_IO(
-  CT = df_harkins$CT,
-  S = df_harkins$S,
-  MC = df_harkins$maximum, 
-  EMC = df_harkins$EMC
-)
-
-# look at the simulated data 
-# View(df_harkins)
-
-#compute the means of IO for each experimental group
-data_final_harkins <- df_harkins %>%
-  group_by(CT, EMC) %>%
-  summarise(means = mean(IO), .groups = "drop")
-
-
-plot_final_harkins <- ggplot(data_final_harkins, aes(x = CT, y = means, color = factor(EMC))) +
-  geom_point(shape = 8) +
-  labs(
-    title = "Mean Individual Outcome (dyn/cm^2)", 
-    subtitle = "Dependent on experimental group (S = 1)", 
-    y = "Sound Pressure in dyn percm^2", 
-    x = "conditions (Number of Cotargets)",
-    color = "EMC"
-  ) +
-  scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
-  theme_bw() +
-  geom_line()
-plot_final_harkins
-
-
-##statistical Analysis for the replication of the Harkins & Jackson Findings - comparison between groups of 1 and 2 persons, computated for every condition of LE alone
+#statistical Analysis for the replication of the Harkins & Jackson Findings - comparison between groups of 1 and 2 persons, computated for every condition of EMC
 
 # We use the same model as for the analysis of Latané et al, but now we're taking a closer look on the LE conditions and their effets
 # now we use all three conditions: the Number of Cotargets (CT), the Effort Matching condition 
@@ -512,6 +442,10 @@ plot_final_harkins
 
 
 # prepare the data for the Jackson & Harkins ANOVA
+df_harkins <- subset(df, CT %in% c(0,1))
+
+# look at the simulated data subset 
+# View(df_harkins)
 
 #define the CT-factor
 df_harkins$CT_factor <- factor(df_harkins$CT,
@@ -542,10 +476,10 @@ hyp_high   <- "Alone.High - Pair.High = 0"
 hyps_harkins <- c(hyp_low, hyp_noinfo, hyp_high)
 
 kontraste_harkins <- mcp(group = hyps_harkins)
-fit_final <- glht(fit_harkins_uni, linfct = kontraste_harkins)
+fit_final_harkins <- glht(fit_harkins_uni, linfct = kontraste_harkins)
 
 #show results
-summary_harkins <- summary(fit_final, test = univariate())
+summary_harkins <- summary(fit_final_harkins, test = univariate())
 p_values_harkins <- summary_harkins$test$pvalues
 
 # extract 
@@ -554,6 +488,4 @@ p_slr  <- p_values_harkins[2]
 p_high <- p_values_harkins[3]
 
 # execute a confidence interval for Harkins & Jackson (1985)
-confint(fit_final)
-
-
+confint(fit_final_harkins)

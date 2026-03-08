@@ -11,7 +11,7 @@ library(multcomp)
 #' 
 #' @return (CON) contingency between input and outcome. Ranges from 0 to 1 (continuous)
 
-get_CON <- function(CT, LE) {
+get_CON <- function(CT) {
   n <- CT + 1
   CON <- 1/n
   return(CON)
@@ -34,8 +34,11 @@ plot_data_CON$CON <- get_CON(
 
 # (example) plot a visual graph for the p1-function
 plot_p1 <- ggplot(plot_data_CON, aes(x = CT, y = CON)) +
-  geom_point(shape = 8) +
-  labs(title = "contingency between input and outcome", subtitle = "Dependent on Cotargets", y = "Contingency", x = "Number of Cotargets") +
+  geom_point(size = 3) +
+  labs(title = "contingency between input and outcome", 
+       subtitle = "Dependent on Cotargets", 
+       y = "Contingency", 
+       x = "Number of Cotargets") +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
   theme_bw() +
   geom_line()
@@ -99,7 +102,6 @@ get_INC <- function(CON) {
   return(INC)
 }
 
-
 # (example) check vectorized form:
 INC <- get_INC(CON)
 INC
@@ -109,7 +111,7 @@ plot_data_INC <- expand.grid(
   CON = CON
 )
 
-# (example) compute the incentive from CT and LE 
+# (example) compute the incentive from CT 
 plot_data_INC$INC <- get_INC(
   CON = plot_data_INC$CON
 )
@@ -125,7 +127,7 @@ plot_t1 <- ggplot(plot_data_INC, aes(x = CON, y = INC)) +
 
 #' t3 transform the EMC condition into loafing expectation
 #' 
-#' @param EMC Effort condition. ordinal variable with the values "1, 2 or 3"
+#' @param EMC Effort condition. ordinal variable with the values "1", "2" or "3"
 #' 
 #' @return (LE) loafing expectation. ordinal variable with possible values as followed: 
 #' "match_low", "no_info", "match_high"
@@ -139,32 +141,37 @@ get_LE <- function(EMC) {
   return(LE)
 }
 
+# (example) check vectorized form:
 EMC <- c(1, 2, 3)
-
 LE <- get_LE(EMC)
 LE
+
+# no example plot is computed, cause there's nothing to show - with the execution of LE we can see the 
+# function is working with vectors 
+
 
 #' p3 compute the individual effort 
 #' 
 #' @param INC incentive to give full effort. Ranges from 0 to 1 (continuous)
 #' @param P social pressure. Ranges from 0 to 1 (continuous)
+#' @param LE loafing expectation. ordinal variable with possible values as followed: 
+#' "match_low", "no_info", "match_high"
 #' 
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
 get_IE <- function(INC, P, LE) {
-  # 1. Die Social Loafing Baseline (Latané)
-  # Dieser Wert sinkt, wenn CT steigt
+  # the Social Loafing baseline (Latané)
+  # whilst CT increases, the output decreases
   loafing_effort <- 0.5 * INC + 0.5 * P
   
-  # 2. Die Effort Matching Logik
-  # Hier definieren wir feste Werte, die die Erwartung an die Einzelbedingung 
-  # der anderen widerspiegeln (unabhängig von der aktuellen Gruppengröße).
-  
+  # the effort matching logic
+  # we're definign fix values which represent the expectation for the "alone"-
+  # condition of other subjects (independent of the current group size)
   final_IE <- case_when(
-    # Bedingung: Partner leistet in seiner Einzelbedingung viel
+    # condition: co-Target is not loafing in its "alone"-condition
     LE == "match_high" ~ 0.9, 
     
-    # Bedingung: Partner leistet in seiner Einzelbedingung wenig
+    # condition: Co-Target is loafing in its "alone"-condition
     LE == "match_low"  ~ 0.4, 
     
     # In der no_info Bedingung greift das klassische Modell (Loafing)
@@ -182,14 +189,14 @@ IE <- get_IE(INC, P, LE)
 IE
 
 
-# (example) create data for INC and P
+# (example) create data for INC, P and LE
 plot_data_IE <- expand.grid(
   INC = INC,
   P = P,
   LE = c("match_high", "match_low", "no_info")
 )
 
-# (example) compute the individual effort from INC and P
+# (example) compute the individual effort from INC, P and LE
 plot_data_IE$IE <- get_IE(
   INC = plot_data_IE$INC,
   P = plot_data_IE$P, 
@@ -199,8 +206,8 @@ plot_data_IE$IE <- get_IE(
 # (example) create an extra column for the plotting
 plot_data_IE$P_label <- paste("Pressure:", round(plot_data_IE$P, digits = 2))
 
-# (example) plot a visual graph for the p1-function
-ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
+# (example) plot a visual graph for the p3-function
+plot_p3 <- ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
   geom_point(shape = 8) +
   facet_wrap(~P_label) +
   labs(title = "Individual effort", 
@@ -218,7 +225,8 @@ ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
 #' Superfunction - compute the individual effort with some noise (through all the previous functions)
 #' 
 #' @param CT number of people who are also viewed as targets of social pressure. Ranges from 0 to infinite (discrete)
-#' @param S number of people viewed as source of social pressure. Ranges from 0 to infinite (discrete)
+#' @param S number of people viewed as source of social pressure. Ranges from 0 to infinite 
+#' @param EMC Effort condition. ordinal variable with the values "1", "2" or "3"
 #' 
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
@@ -235,6 +243,8 @@ get_super_IE <- function(CT, S, EMC) {
   return(IE)
 }
 
+# note: we dont need plots for our superfunctions, cause they are not directly labeled in the VAST
+# note2: this applies for a check of vectorized forms too... we did that earlier
 
 #' t2-function (manifest) - compute the individual outcome
 #' 
@@ -268,8 +278,8 @@ plot_data_IO$IO <- get_IO(
 # (example) create an extra column for the plotting
 plot_data_IO$IE_label <- paste("Individual Effort:", round(plot_data_IO$IE, digits = 2))
 
-# (example) plot a visual graph for the p1-function
-ggplot(plot_data_IO, aes(x = MC, y = IO)) +
+# (example) plot a visual graph for the t2-function
+plot_IO <- ggplot(plot_data_IO, aes(x = MC, y = IO)) +
   geom_point(shape = 8) +
   facet_wrap(~plot_data_IO$IE_label) +
   labs(title = "Individual outcome", subtitle = "Dependent on Maximum + Individual effort", y = "Individual outcome", x = "Individual Maximum") +
@@ -292,35 +302,42 @@ get_super_IO <- function(CT, S, MC, EMC){
   return (IO)
 }
 
+# note: we dont need plots for our superfunctions, cause they are not directly labeled in the VAST
+# note2: this applies for a check of vectorized forms too... we did that earlier
+
+
+
 ### Final Simulation
 
-## Replicate the original Study of Latané et al. 
-
-# Simulate virtual experiments from the model.
+## Simulate virtual experiments from the model.
 # ---------------------------------------------------------------------------
 # We assume that the model is the true data generating model.
-# As it is a deterministic (IS IT???) model, any virtual participant
+# As it is a deterministic model, any virtual participant
 # will have on average the same individual effort based on 
-# the number of Cotargets (CT) and Sources of Social Pressure (S)
-# (note: more input Data is generated for we have LE as an predictor aswell, but this is only needed later on when we replicate Harkin's research)
-
+# the number of Co-targets (CT) and Sources of Social Pressure (S)
+# (note: more input Data is generated for we have EMC as a predictor aswell, but this is only needed later on when we replicate Harkins' research)
 
 # Variability comes into the experiment by:
 # (a) Different trait values for the maximum noise each person can produce
-# (b) Randomness from the noise we compute in the superfuncion - due to e.g. 
-#     faitgue, personality, mental state etc.  during the experiment
+# (b) Randomness from the noise we compute in the superfunction - due to e.g. 
+#     fatigue, personality, mental state etc.  during the experiment
 
-# You can run the script repeatedly to simulate new replication studies,
+# You can run the script repeatedly to simulate new replication studies
 # and observe the variability in outcomes due to sampling variability.
+# not: if you're planning this, make sure you don't execute the seed
 
+#set seed if you want to get the same results as presented in our report
 set.seed(324)
+
+
+## Replicate the original Study of Latané et al.
 
 # set sample size of participants (we assume a within-person design)
 # derived  from experiment 2 - the pseudo-groups (Latané et al.)
 n <- 36
 
 # experimental design: Latané et al. (1979)
-# create data for CT and S
+# create data for CT and S and necessarily for EMC too (but not relevant for our analysis)
 
 df <- expand.grid(
   id = 1:n, 
@@ -385,7 +402,7 @@ plot_final <- ggplot(data_final, aes(x = CT, y = means, color = factor(EMC))) +
   geom_line()
 plot_final
 
-## Variance analysis for the replication of Latane (1979)
+## Variance analysis for the replication of Latané (1979)
 # we have to set the LE condition to 0.7, cause Effort Matching wasn't integrated in this paper
 df_Latane <- subset(df, EMC == 2)
 
@@ -396,6 +413,7 @@ df_Latane$CT_factor <- factor(df_Latane$CT,
 
 fit_aov <- aov(IO ~ CT_factor, data = df_Latane)
 
+#define the hypothesis
 hyp1 <- "CT1 - CT5 <= 0"
 hyp2 <- "CT0 - CT1 <= 0"
 hyps <- c(hyp1, hyp2)
@@ -408,7 +426,82 @@ confint(fit, level = 0.95, calpha = univariate_calpha())
 summary(fit, test = univariate())
 
 
-##statistical Analysis for the replication of the Harkin Findings - comparison between groups of 1 and 2 persons, computated for every condition of LE alone
+
+
+## Replicate the original Study of Harkins & Jackson
+
+# set sample size of participants (we assume a within-person design)
+# derived  from experiment 2 - the pseudo-groups (Latané et al.)
+n <- 42
+
+# experimental design: Harkins & Jackson. (1985)
+# create data for CT, S and EMC too (now relevant for the analysis)
+
+df_harkins <- expand.grid(
+  id = 1:n, 
+  CT = c(0, 1),
+  S = c(2),
+  EMC = c(1, 2, 3) # LE, SLR, HE
+)
+
+# determine the variables for a simulation of the exogenous variables
+phi <- 5
+alpha <- 0.922*phi
+beta <- (1-0.922)*phi
+
+scale_factor <- 12.29 / 0.922
+
+# interindividual variability in exogenous variable ("maximum capacity")
+max_per_person <- data.frame(
+  id = 1:n,
+  maximum = scale_factor * rbeta(n, alpha, beta)
+)
+
+mean(max_per_person$maximum)
+
+# merge into df
+df_harkins <- merge(df_harkins, max_per_person, by = "id")
+
+# compute the psychological outcome variable (IE)
+df_harkins$IE <- get_super_IE(
+  CT = df_harkins$CT,
+  S = df_harkins$S, 
+  EMC = df_harkins$EMC
+)
+
+# compute the manifest outcome variable (IO)
+df_harkins$IO <- get_super_IO(
+  CT = df_harkins$CT,
+  S = df_harkins$S,
+  MC = df_harkins$maximum, 
+  EMC = df_harkins$EMC
+)
+
+# look at the simulated data 
+# View(df_harkins)
+
+#compute the means of IO for each experimental group
+data_final_harkins <- df_harkins %>%
+  group_by(CT, EMC) %>%
+  summarise(means = mean(IO), .groups = "drop")
+
+
+plot_final_harkins <- ggplot(data_final_harkins, aes(x = CT, y = means, color = factor(EMC))) +
+  geom_point(shape = 8) +
+  labs(
+    title = "Mean Individual Outcome (dyn/cm^2)", 
+    subtitle = "Dependent on experimental group (S = 1)", 
+    y = "Sound Pressure in dyn percm^2", 
+    x = "conditions (Number of Cotargets)",
+    color = "EMC"
+  ) +
+  scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
+  theme_bw() +
+  geom_line()
+plot_final_harkins
+
+
+##statistical Analysis for the replication of the Harkins & Jackson Findings - comparison between groups of 1 and 2 persons, computated for every condition of LE alone
 
 # We use the same model as for the analysis of Latané et al, but now we're taking a closer look on the LE conditions and their effets
 # now we use all three conditions: the Number of Cotargets (CT), the Effort Matching condition 
@@ -418,9 +511,7 @@ summary(fit, test = univariate())
 # create significant p-values
 
 
-# prepare the data for the Harkings ANOVA
-
-df_harkins <- subset(df, CT %in% c(0, 1))
+# prepare the data for the Jackson & Harkins ANOVA
 
 #define the CT-factor
 df_harkins$CT_factor <- factor(df_harkins$CT,
@@ -457,15 +548,12 @@ fit_final <- glht(fit_harkins_uni, linfct = kontraste_harkins)
 summary_harkins <- summary(fit_final, test = univariate())
 p_values_harkins <- summary_harkins$test$pvalues
 
+# extract 
 p_low  <- p_values_harkins[1]
 p_slr  <- p_values_harkins[2]
 p_high <- p_values_harkins[3]
 
+# execute a confidence interval for Harkins & Jackson (1985)
 confint(fit_final)
-
-
-
-
-
 
 

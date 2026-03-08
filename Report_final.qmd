@@ -89,7 +89,6 @@ The relationship between the Co-Targets, Sources and the Pressure on the subject
 #| warning: false
 
 plot_p2
-
 ```
 
 The relationship between Co-Targets and the contingency was rather intuitive, due to the specific function derived from the core report (citation Latané). It is presented in @fig-p1

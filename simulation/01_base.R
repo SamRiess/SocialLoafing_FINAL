@@ -279,7 +279,7 @@ plot_data_IO$IO <- get_IO(
 plot_data_IO$IE_label <- paste("Individual Effort:", round(plot_data_IO$IE, digits = 2))
 
 # (example) plot a visual graph for the t2-function
-plot_IO <- ggplot(plot_data_IO, aes(x = MC, y = IO)) +
+plot_t2 <- ggplot(plot_data_IO, aes(x = MC, y = IO)) +
   geom_point(shape = 8) +
   facet_wrap(~plot_data_IO$IE_label) +
   labs(title = "Individual outcome", subtitle = "Dependent on Maximum + Individual effort", y = "Individual outcome", x = "Individual Maximum") +

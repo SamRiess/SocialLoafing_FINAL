@@ -2,6 +2,37 @@
 \ifnextchar[{\eatarg}{}
 
 
+\caption{\label{fig-vast}Structure of the VAST phenomenon}
+
+\centering{
+
+\includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{doc/VAST_SocialLoafing_Phenomenon_image.png}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-mechanism}Structure of the VAST theory and
+mechanism}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{doc/VAST_SocialLoafing_Mechanism_image.png}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
 \caption{\label{fig-p2}Plot for the relationsship p2}
 
 \centering{
@@ -37,6 +68,36 @@
 \centering{
 
 \pandocbounded{\includegraphics[keepaspectratio]{Report_final_files/figure-pdf/fig-t1-1.pdf}}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-p3}Plot for the relationship p3}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{Report_final_files/figure-pdf/fig-p3-1.pdf}}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-t2}Plot for the relationship t2}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{Report_final_files/figure-pdf/fig-t2-1.pdf}}
 
 }
 

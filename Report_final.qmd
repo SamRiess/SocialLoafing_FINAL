@@ -63,7 +63,10 @@ All constructs and their sources can be seen in (Table 1).
 
 ## Identification of the relevant Phenomena
 
-In (hier Zitation einfügen), the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". In the following sections, we aimed to create a link between this phenomenon and our formalization of the social impact theory.
+In (hier Zitation einfügen), the social loafing is described as followed: "People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone". In the following sections, we aimed to create a link between this phenomenon and our formalization of the social impact theory. The phenomenon itself can be seen in @fig-vast.
+
+![Structure of the VAST phenomenon](doc/VAST_SocialLoafing_Phenomenon_image.png){#fig-vast fig-align="center" width="80%"}
+
 
 To adress the robustness of our phenomena and therefore the good reason for investigating it further, we part it into two sections: Strength of evidence and Generalizability, using the UTOS framework (citation cronbach&Shapiro). We get our overview for both sections mentionend in this article by excerping the Meta-Analysis about social loafing by (citation Karau et al.). We found phrases like "Both laboratory exeriments and field studies have been conducted using a range of subject populations varying in age, gender, and culutre". This leads to the assumption that at least the setting (S) and the Units (U) were varied over the years, for the meta-analysis conducts about ... . Others phrases like "Several studies provided data for more than one relevant dependent variable" areleading towards a given generalizability for the dimension of Outcomes (O). At last, we found evidence The strehgth of evidene can be acknowledged cause the effect sizes are estimated using mean effect sizes that "differed significantly from the 0.00 value that indicates exatly no difference". In the end, the phenomenon can be considered robust because the whole UTOS framework and the strength of evidence are supported with empirical data.
 
@@ -75,13 +78,13 @@ Throughout our formalization, we use the Visual Argument Strucure Tool (VAST, ci
 
 ## Formalization of the Theory
 
-We used the VAST (Visual Argument Structure Tool) as a graphic form of formalization for our theory. Furhter information about the VAST and its application can be found in (hier Zitation einfügen). In the process, it was crucial to limit our scope, referring to both theory and phenomena. The main goal should be understandability, not the whole integrity of the full theory.
+We used the VAST (Visual Argument Structure Tool) as a graphic form of formalization for our theory. Further information about the VAST and its application can be found in (hier Zitation einfügen). In the process, it was crucial to limit our scope, referring to both theory and phenomena. The main goal should be understandability, not the whole integrity of the full theory. The resulting prototype theory which ought to explain the phenomenon is presented in (@fig-mechanism). The "relationships" section shows each relationship and its justification, based on citations (labeled with a "c" in TabelleRelationship) or our own assumptions or restrictions.
 
-## Variables
+![Structure of the VAST theory and mechanism](doc/VAST_SocialLoafing_Mechanism_image.png){#fig-mechanism fig-align="center" width="100%"}
 
 ## Relationships
 
-The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. 
+The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. We aimed to write a function that is consistent with exact citation from the sources. Originally, the pressure can be lowered throughout the number of Co-Targets and Sources simultaneously. As we can see in the Graphs, the higher the Number of Sources is, the higher gets the felt impact on one subject. This represents the classic increase which is mentioned in c1. But with an increase of the number of Co-Targets, the impact lowered rapidly. Therefore, consistent with the general interpretation of social impact theory, felt impact is divided up among the group members (c3-c6).
 
 ```{r}
 #| label: fig-p2
@@ -92,7 +95,7 @@ The relationship between the Co-Targets, Sources and the Pressure on the subject
 plot_p2
 ```
 
-The relationship between Co-Targets and the contingency was rather intuitive, due to the specific function derived from the core report (citation Latané). It is presented in @fig-p1
+The left path of our VAST (Figur VAST) is our main mechanism which produces the phenomenon in the end. It starts with the relationship between Co-Targets and the contingency which was rather intuitive, due to the specific function derived from the core report (citation Latané). It is presented in @fig-p1.
 
 ```{r}
 #| label: fig-p1
@@ -103,8 +106,7 @@ The relationship between Co-Targets and the contingency was rather intuitive, du
 plot_p1
 ```
 
-
-After that, the transformation for the Incentive can be represented by a proportional increase: incentive gets the same values as the previously computated contingency (@fig-t1). 
+After that, the transformation for the Incentive can be represented by a proportional increase: incentive gets the same values as the previously computated contingency (@fig-t1). This was not based on a focal theory, but we infered that an incentive to give one's own full effort directly results from the depicted contigency.
 
 ```{r}
 #| label: fig-t1
@@ -115,23 +117,38 @@ After that, the transformation for the Incentive can be represented by a proport
 plot_t1
 ```
 
-Things were getting more interesting with the function that computes the individual effort, using alle previously computated and simulated input variables. The plot can be viewed in 
+Things were getting more interesting with the function that computes the resulting individual effort, using all previously computated and simulated input variables. Both paths of our own VAST meet together in this relationship. The plot can be viewed in @fig-p3, showing the first influence of our effort Matching condition aswell. We wrote a function which transforms the manifest effort-matching condition (EMC) into the latent construct of a loafing expectation (LE), named t3. If the subject takes action in the LE (low effort) or HE (high effort) condition, effort matching takes place and fixes individual effort to a previously fixed value for each condition. These two values for effort matching conditions can be chosen individually, but we made sure that its higher in the HE condition compared to the LE one. The blue graph shows the natural social loafing mechanism for the individual effort, based on no information whatsoever about the others effort. First, if the pressure is high, the function starts higher cause the subject feels more bound to the outcome. Secondly, with more incentive to give full effort the subject is getting higher values in the effort. We argue that, besides great pressure, the effort won't reach its maximum if the incentive to give full effort isn't maximized.
 
 ```{r}
+#| label: fig-p3
+#| fig-cap: "Plot for the relationship p3"
+#| echo: false
+#| warning: false
 
+plot_p3
 ```
 
+The last isolated relationship we have to show is the transformation of IE and MC into the individual Outcome (IO). This can be seen in @fig-t2. As we can see, the more maximum capacity each subject has, the highter the value for the outcome is. That occures because we defined IE as a percentage of 1 (p.ex. 0.6) which is offset against the maximum. Further, we can see that with more effort, the outcome is increasing simultaneously. We concluded a interaction effect between MC and INC that accounts for the final value of one's own output.
 
+```{r}
+#| label: fig-t2
+#| fig-cap: "Plot for the relationship t2"
+#| echo: false
+#| warning: false
 
+plot_t2
+```
 
+## the formal model 
 
-# The formal model
+## Variables
 
-## Development of a formal model
+The variables for each of our constructs, if shown in our VAST, can be seen in (Tabelle mit Variablen).
+
 
 ## Testing the formal model
 
-Finally, we got to test our model with our simulation. It turns out that both effects, on one side the social loafing but on the other side the elimination of this phenomenon throughout implementing a low and high Effort condition  was successful. The result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`.
+Finally, we got to test our model with our simulation. It turns out that both effects, on one side the social loafing but on the other side the elimination of this phenomenon throughout implementing a low and high Effort condition was successful. The result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`.
 
 ```{r}
 #| label: fig-final
@@ -142,9 +159,7 @@ Finally, we got to test our model with our simulation. It turns out that both ef
 plot_final
 ```
 
-
 ## Evaluation of the formal model
-
 
 # Discussion
 

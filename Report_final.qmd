@@ -42,6 +42,7 @@ library(pwr) # for the power-Analysis
 
 #if we source a R-document, it runs in advance and we get all created objects from that file aswell for that document/report
 source("simulation/01_base.R")
+source("simulation/02_simulation.R")
 ```
 
 # Introduction

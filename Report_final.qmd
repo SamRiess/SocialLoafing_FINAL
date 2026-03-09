@@ -26,6 +26,7 @@ keywords:
 - formalization 
 - Social impact theory 
 - social loafing
+- effort matching
 
 abstract: "insert abstract here later on"
 bibliography: references.bib
@@ -39,6 +40,9 @@ bibliography: references.bib
 library(papaja) # for an automatically outut of results, p.e. apa_print()
 library(flextable) # for displaying tables in APA-Style 
 library(pwr) # for the power-Analysis 
+library(ggplot2) # for the plotting and descriptives
+library(dplyr) # for smoother functions
+library(multcomp) # for the statistical analyses
 
 #if we source a R-document, it runs in advance and we get all created objects from that file aswell for that document/report
 source("simulation/01_base.R")
@@ -75,17 +79,17 @@ To address the robustness of social loafing and therefore the good reason for in
 
 ## used software
 
-Throughout our formalization, we use the Visual Argument Strucure Tool (VAST, [@leising2023]) to build a graphic visualization of the theory and resulting mechanisms. With this methodology, we are able to define relationships, out understanding of core constructs and the mechanisms that take place in the process of social loafing and effort matching. For the computation of our simulated Data, we used R(hier Versionsnummer einfügen). Our graphic representation of the formalized theory was enabled throughout the application draw.io in which we created our VAST model.
+Throughout our formalization, we use the Visual Argument Structure Tool (VAST, [@leising2023]) to build a graphic visualization of the theory and resulting mechanisms. With this methodology, we are able to define relationships, out understanding of core constructs and the mechanisms that take place in the process of social loafing and effort matching. For the computation of our simulated Data, we used R(hier Versionsnummer einfügen). Our graphic representation of the formalized theory was enabled throughout the application draw.io in which we created our VAST model.
 
-## Formalization of the Theory
+## Formalization of the (Proto-)Theory
 
-We used the VAST (Visual Argument Structure Tool) as a graphic form of formalization for our theory. Further information about the VAST and its application can be found in (hier Zitation einfügen). In the process, it was crucial to limit our scope, referring to both theory and phenomena. The main goal should be understandability, not the whole integrity of the full theory. The resulting prototype theory which ought to explain the phenomenon is presented in (@fig-mechanism). The "relationships" section shows each relationship and its justification, based on citations (labeled with a "c" in TabelleRelationship) or our own assumptions or restrictions.
+We used the VAST (Visual Argument Structure Tool) as a graphic form of formalization for our theory. Further information about the VAST and its application can be found in @leising2023. In the process, it was crucial to limit our scope, referring to both theory and phenomena. The main goal should be understandability, not the whole integrity of the full theory. The resulting prototype theory which ought to explain the phenomenon is presented in (@fig-mechanism). The "relationships" section shows each relationship and its justification, based on citations (labeled with a "c" in TabelleRelationship) or our own assumptions or restrictions. In keeping this section short, I am mixing up the explanation of the theory and justification of the described relationships.
 
 ![Structure of the VAST theory and mechanism](doc/VAST_SocialLoafing_Mechanism_image.png){#fig-mechanism fig-align="center" width="100%"}
 
-## Relationships
+### Relationships
 
-The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. We aimed to write a function that is consistent with exact citation from the sources. Originally, the pressure can be lowered throughout the number of Co-Targets and Sources simultaneously. As we can see in the Graphs, the higher the Number of Sources is, the higher gets the felt impact on one subject. This represents the classic increase which is mentioned in c1. But with an increase of the number of Co-Targets, the impact lowered rapidly. Therefore, consistent with the general interpretation of social impact theory, felt impact is divided up among the group members (c3-c6).
+The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. We aimed to write a function that is consistent with exact citations from the sources. Originally, the pressure can be lowered throughout the number of Co-Targets and Sources simultaneously. As we can see in the Graphs, the higher the Number of Sources is, the higher gets the felt impact on one subject. This represents the classic increase which is mentioned in c4. But with an increase of the number of Co-Targets, the impact lowered rapidly. Therefore, consistent with the general interpretation of social impact theory, felt impact is divided up among the group members (c5-c8).
 
 ```{r}
 #| label: fig-p2
@@ -96,7 +100,7 @@ The relationship between the Co-Targets, Sources and the Pressure on the subject
 plot_p2
 ```
 
-The left path of our VAST (Figur VAST) is our main mechanism which produces the phenomenon in the end. It starts with the relationship between Co-Targets and the contingency which was rather intuitive, due to the specific function derived from the core report (citation Latané). It is presented in @fig-p1.
+The left path of our VAST (@fig-mechanism) is our main mechanism which produces the phenomenon in the end. It starts with the relationship between Co-Targets and the contingency which was rather intuitive, due to the specific function derived from the core report, verified with [@latané1979] and specifically in c1-c3. It is presented in @fig-p1.
 
 ```{r}
 #| label: fig-p1
@@ -107,7 +111,7 @@ The left path of our VAST (Figur VAST) is our main mechanism which produces the 
 plot_p1
 ```
 
-After that, the transformation for the Incentive can be represented by a proportional increase: incentive gets the same values as the previously computated contingency (@fig-t1). This was not based on a focal theory, but we infered that an incentive to give one's own full effort directly results from the depicted contigency.
+After that, the transformation for the Incentive can be represented by a proportional increase: Incentive gets the same values as the previously computed contingency (@fig-t1). This was not based on a focal theory, but we deviated that an incentive to give one's own full effort directly results from the depicted contingency, also proved with c14.
 
 ```{r}
 #| label: fig-t1
@@ -118,7 +122,7 @@ After that, the transformation for the Incentive can be represented by a proport
 plot_t1
 ```
 
-Things were getting more interesting with the function that computes the resulting individual effort, using all previously computated and simulated input variables. Both paths of our own VAST meet together in this relationship. The plot can be viewed in @fig-p3, showing the first influence of our effort Matching condition aswell. We wrote a function which transforms the manifest effort-matching condition (EMC) into the latent construct of a loafing expectation (LE), named t3. If the subject takes action in the LE (low effort) or HE (high effort) condition, effort matching takes place and fixes individual effort to a previously fixed value for each condition. These two values for effort matching conditions can be chosen individually, but we made sure that its higher in the HE condition compared to the LE one. The blue graph shows the natural social loafing mechanism for the individual effort, based on no information whatsoever about the others effort. First, if the pressure is high, the function starts higher cause the subject feels more bound to the outcome. Secondly, with more incentive to give full effort the subject is getting higher values in the effort. We argue that, besides great pressure, the effort won't reach its maximum if the incentive to give full effort isn't maximized.
+Things were getting more interesting with the function that computes the resulting individual effort, using all previously computed and simulated input variables. Both paths of our own VAST meet together in this relationship. The plot can be viewed in @fig-p3, showing the first influence of our effort Matching condition aswell. I wrote a function which transforms the manifest effort-matching condition (EMC) into the latent construct of a loafing expectation (LE), named t3and supported by c12/c13. If the subject takes action in the LE (low effort) or HE (high effort) condition, effort matching takes place and fixes individual effort to a previously fixed value for each condition. These two values for effort matching conditions can be chosen individually, but we made sure that its higher in the HE condition compared to the LE one. The blue graph shows the natural social loafing mechanism for the individual effort, based on no information whatsoever about the others effort. First, if the pressure is high, the function starts higher cause the subject feels more bound to the outcome. Secondly, with more incentive to give full effort the subject is getting higher values in the effort. We argue that, besides great pressure, the effort won't reach its maximum if the incentive to give full effort isn't maximized. The basic idea of the relationship is supported by c9-c11. We had to adjust the function to fit in our theory and model so P and IE had a range from 0-1.
 
 ```{r}
 #| label: fig-p3
@@ -129,7 +133,7 @@ Things were getting more interesting with the function that computes the resulti
 plot_p3
 ```
 
-The last isolated relationship we have to show is the transformation of IE and MC into the individual Outcome (IO). This can be seen in @fig-t2. As we can see, the more maximum capacity each subject has, the highter the value for the outcome is. That occures because we defined IE as a percentage of 1 (p.ex. 0.6) which is offset against the maximum. Further, we can see that with more effort, the outcome is increasing simultaneously. We concluded a interaction effect between MC and INC that accounts for the final value of one's own output.
+The last isolated relationship we have to show is the transformation of IE and MC into the individual Outcome (IO). As can be seen in @fig-t2, the more maximum capacity each subject has, the higher the value for the outcome is. That occurs because we defined IE as a percentage of 1 (e.g. 0.6 = 60%) which is offset against the maximum. Hence, with more effort, the outcome is increasing simultaneously. We concluded a interaction effect between MC and IE that accounts for the final value of one's own output. The transformation function was needed to compute the manifest outcome for each person (e.g. in c15) and the group means for our statistical analysis later on.
 
 ```{r}
 #| label: fig-t2
@@ -140,16 +144,14 @@ The last isolated relationship we have to show is the transformation of IE and M
 plot_t2
 ```
 
-## the formal model
-
-## Variables
+### Variables
 
 The variables for each of our constructs, if shown in our VAST, can be seen in (Tabelle einfügen).
 
 ## Evaluation of the formal model
 
-Finally, we got to test our model with our simulation. We simulated the original experiment for social loafing, using the sound pressure as the individual outcome [@latane1979] but added one more predictor: the EMC. With a sample size of n=36 (view [@latane1979], we were able to test for the original effect and the effort matching mechanism together. 
-The descriptives for both analyses are showcased in @fig-box1 and @fig-box2
+Finally, we got to test our model with our simulation. We simulated the original experiment for social loafing, using the sound pressure as the individual outcome [@latane1979] but added the EMC predictor, known in our theory by "Effort matching condition". With a sample size of n=36 (view [@latane1979], we were able to test for the original effect and the effort matching mechanism in one sample). The descriptives for both analyses are showcased in @fig-box1 and @fig-box2.
+These are highly influenced by the noise term of p3 and can be adjusted freely. We chose the parameters mean = 0 and sdd = 0.3 for our "noise term" of that function, cause we assume that variability comes into the model throughout many sources: e.g. fatigue, personality, or the current mental state.
 
 ```{r}
 #| label: fig-box1
@@ -174,8 +176,7 @@ boxplot_harkins
 latane_anova <- apa_print(fit_aov)
 ```
 
-
-It turns out that both effects, on one side the social loafing but on the other side the elimination of this phenomenon throughout implementing a low and high Effort condition was successful. The result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`. For our main replication, the number of Co-Targets had a significant effect on the individual sound output `r latane_anova$full_result$CT_factor`.
+It turns out that both effects, on one side the social loafing but on the other the elimination of this phenomenon throughout implementing a low and high Effort condition was successful. The packed result can be viewed in @fig-final. Only in the SLR-condition, we detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, same for the high effort condition with p=`r printp(p_high)`. Therefore, we've shown that Effort Matching is produced via our model. For our main replication, the number of Co-Targets had a significant effect on the individual sound output `r latane_anova$full_result$CT_factor`. This is consistent with the findings of [@latané1979] and proves that our model is capable of producing the main effect: a decrease in individual and group outcome throughout an increase of Co-Targets.
 
 ```{r}
 #| label: fig-final
@@ -187,6 +188,8 @@ plot_final
 ```
 
 # Meta-reflection
+
+Some issues need to be discussed at the end. First, they original paper contained many jangle-fallacies, so it was quite difficult to form some definitions for our main construct. E.g, the "outcome" was often labeled as "performance" and hard to differ from definitions like "effort". Second, it was a challenge to implement the sources into our model, cause there were mentioned but not directly manipulated in the experiments [@latané1979]. The social loafing theory itself (view @latané1981)has some issues too: Both Co-Targets and Sources flow in the creation of social impact, but there's no specification of the augry and how it can be computed - we had to make a few more assumptions and set the augy to positive. A good limitation of the scope is absolutely necessary when formalizing this theory while Using VAST cause there are some inconsitencies that need to be eliminated with that procedure
 
 # References
 

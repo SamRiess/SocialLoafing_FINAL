@@ -1,6 +1,6 @@
 ###Creating of the base functions to compute the outcome of the simulation later on
 
-# load the necessary libraries
+# load the necessary libraries (these command are executed in the Quarto Script too, but they remain in this section for better traceability)
 library(ggplot2)
 library(dplyr)
 library(multcomp)

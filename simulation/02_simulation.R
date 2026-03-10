@@ -95,6 +95,7 @@ plot_final
 
 # Variance analysis 
 # we have to set the EMC condition to 2, cause Effort Matching wasn't integrated in this paper
+# prepare the data subset for the Latané ANOVA
 df_Latane <- subset(df, EMC == 2)
 
 #define the CT-factor
@@ -102,17 +103,17 @@ df_Latane$CT_factor <- factor(df_Latane$CT,
                               levels = c(0,1,5),
                               labels = c("CT0","CT1","CT5"))
 
-fit_aov <- aov(IO ~ CT_factor, data = df_Latane)
+fit_Latane <- aov(IO ~ CT_factor, data = df_Latane)
 
 #define the hypothesis
 hyp1 <- "CT1 - CT5 <= 0"
 hyp2 <- "CT0 - CT1 <= 0"
-hyps <- c(hyp1, hyp2)
+hyps_Latane <- c(hyp1, hyp2)
 
-kontraste <- mcp(CT_factor = hyps)
+kontraste <- mcp(CT_factor = hyps_Latane)
 
 #execute the ANOVA
-fit <- glht(fit_aov, linfct = kontraste)
+fit <- glht(fit_Latane, linfct = kontraste)
 
 confint(fit, level = 0.95, calpha = univariate_calpha())
 summary(fit, test = univariate())
@@ -147,7 +148,7 @@ boxplot_latane
 # create significant p-values
 
 
-# prepare the data for the Jackson & Harkins ANOVA
+# prepare the data subset for the Jackson & Harkins ANOVA
 df_harkins <- subset(df, CT %in% c(0,1))
 
 # look at the simulated data subset 
@@ -166,7 +167,7 @@ df_harkins$EMC_factor <- factor(df_harkins$EMC,
 fit_harkins <- aov(IO ~ CT_factor * EMC_factor, data = df_harkins)
 summary(fit_harkins)
 
-#testing each pair between 0 and 1 Cotarget for each EMC condition
+#testing each pair between 0 and 1 Co-targets for each EMC condition
 
 #preparation: create a combined group for contrasts
 df_harkins$group <- interaction(df_harkins$CT_factor, df_harkins$EMC_factor)
@@ -178,7 +179,6 @@ fit_harkins_uni <- aov(IO ~ group, data = df_harkins)
 hyp_low    <- "Alone.Low - Pair.Low = 0"
 hyp_noinfo <- "Alone.SLR - Pair.SLR = 0"
 hyp_high   <- "Alone.High - Pair.High = 0"
-
 hyps_harkins <- c(hyp_low, hyp_noinfo, hyp_high)
 
 kontraste_harkins <- mcp(group = hyps_harkins)

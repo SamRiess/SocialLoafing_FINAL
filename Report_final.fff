@@ -148,3 +148,19 @@ Harkins}
 }
 
 \end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+\caption{\label{fig-vast-nof}Structure of the loafing mechanism without
+Fallacies}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{doc/VAST_SocialLoafing_Mechanism_noFallacy_image.png}
+
+}
+
+\end{figure*}

@@ -17,6 +17,22 @@
 \ifnextchar[{\eatarg}{}
 
 
+\caption{\label{fig-mechanism}Structure of the VAST theory and
+mechanism}
+
+\centering{
+
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio]{doc/VAST_SocialLoafing_Mechanism_Fallacy_image.png}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
 \caption{\label{fig-p2}Plot for the relationsship p2}
 
 \centering{

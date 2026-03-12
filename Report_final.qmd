@@ -151,7 +151,7 @@ The simulation-relevant relationship we have to show is the transformation of IE
 plot_t2
 ```
 
-The behavior of the combined system is shown in (figure Sueprfunction IE). It is pretty similar to the IE function but deviates in its own input variables. In this case, we used alle manifest ones and threw them into the whole psychological process that it labeled "Psyche" (see @fig-vast for clarification). The resulting "superfunction" can be described as followed: 
+The behavior of the combined system is shown in (). It is pretty similar to the IE function but deviates in its own input variables. In this case, we used alle manifest ones and threw them into the whole psychological process that it labeled "Psyche" (see @fig-vast for clarification). The resulting "superfunction" can be described as followed: 
 
 ## Evaluation of the formal model
 

@@ -244,18 +244,18 @@ get_super_IE <- function(CT, S, EMC) {
 }
 
 # (example) check vectorized form
-IE <- get_super_IE(INC, P, LE)
+IE <- get_super_IE(CT, S, EMC)
 IE
 
 # (example) create data for INC, P and LE (all variables were defined earlier in the code)
 plot_data_super_IE <- expand.grid(
-  Ct = CT,
+  CT = CT,
   S = S,
-  EMC = c(1, 2, 3)
+  EMC = EMC
 )
 
 # (example) compute the individual effort from CT, S and EMC
-plot_data_IE$IE <- get_IE(
+plot_data_super_IE$IE <- get_super_IE(
   CT = plot_data_super_IE$CT,
   S = plot_data_super_IE$S, 
   EMC = plot_data_super_IE$EMC
@@ -265,7 +265,7 @@ plot_data_IE$IE <- get_IE(
 plot_data_super_IE$S_label <- paste("Sources:", plot_data_super_IE$S)
 
 # (example) plot a visual graph for the p3-function
-plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, color = EMC, group = EMC)) +
+plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, color = as.factor(EMC), group = EMC)) +
   geom_point(shape = 8) +
   facet_wrap(~S_label) +
   labs(title = "Individual effort", 
@@ -273,8 +273,8 @@ plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, color = EMC, group 
        y = "Individual effort", 
        x = "number of Co-Targets", 
        color = "condition (EMC)") +
-  scale_x_continuous(limits = c(0, 1), breaks = c(round(CT, digits = 2))) +
-  scale_y_continuous(limits = c(0, 1), breaks = c(round(IE, digits = 2))) +
+  scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
+  scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
   theme_bw() +
   geom_line()
 

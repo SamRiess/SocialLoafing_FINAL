@@ -214,7 +214,7 @@ plot_p3 <- ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
        subtitle = "Dependent on Pressure + Incentive", 
        y = "Individual effort", 
        x = "Incentive", 
-       color = "Bedingung (LE)") +
+       color = "expectation (LE)") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(INC, digits = 2))) +
   scale_y_continuous(limits = c(0, 1), breaks = c(round(IE, digits = 2))) +
   theme_bw() +
@@ -243,8 +243,41 @@ get_super_IE <- function(CT, S, EMC) {
   return(IE)
 }
 
-# note: we dont need plots for our superfunctions, cause they are not directly labeled in the VAST
-# note2: this applies for a check of vectorized forms too... we did that earlier
+# (example) check vectorized form
+IE <- get_super_IE(INC, P, LE)
+IE
+
+# (example) create data for INC, P and LE (all variables were defined earlier in the code)
+plot_data_super_IE <- expand.grid(
+  Ct = CT,
+  S = S,
+  EMC = c(1, 2, 3)
+)
+
+# (example) compute the individual effort from CT, S and EMC
+plot_data_IE$IE <- get_IE(
+  CT = plot_data_super_IE$CT,
+  S = plot_data_super_IE$S, 
+  EMC = plot_data_super_IE$EMC
+)
+
+# (example) create an extra column for the plotting
+plot_data_super_IE$S_label <- paste("Sources:", plot_data_super_IE$S)
+
+# (example) plot a visual graph for the p3-function
+plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, color = EMC, group = EMC)) +
+  geom_point(shape = 8) +
+  facet_wrap(~S_label) +
+  labs(title = "Individual effort", 
+       subtitle = "Dependent on Cotargets + Sources", 
+       y = "Individual effort", 
+       x = "number of Co-Targets", 
+       color = "condition (EMC)") +
+  scale_x_continuous(limits = c(0, 1), breaks = c(round(CT, digits = 2))) +
+  scale_y_continuous(limits = c(0, 1), breaks = c(round(IE, digits = 2))) +
+  theme_bw() +
+  geom_line()
+
 
 #' t2-function (manifest) - compute the individual outcome
 #' 
@@ -302,7 +335,7 @@ get_super_IO <- function(CT, S, MC, EMC){
   return (IO)
 }
 
-# note: we dont need plots for our superfunctions, cause they are not directly labeled in the VAST
-# note2: this applies for a check of vectorized forms too... we did that earlier
+# note: we dont need plots for this superfunctions, cause it is shown in the "Evaluation" section later on.
+# note2: this applies for a check of vectorized forms too... we did that earlier in checking the isolated functions.
 
 # the final simulation for this model can be seen in 02_simulation.R 

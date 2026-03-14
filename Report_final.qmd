@@ -75,7 +75,7 @@ To address the robustness of social loafing and therefore the very reason for in
 
 # Method
 
-All documents used in the process of writing this report can be found and downloaded through the GitHub repository: https://github.com/SamRiess/SocialLoafing_FINAL.git
+All documents used in the process of writing this report can be found and downloaded through the GitHub repository: https://github.com/SamRiess/SocialLoafing_FINAL.git This report refers to version number v1.0.0. See the .cff file for further information. 
 
 ## used software
 

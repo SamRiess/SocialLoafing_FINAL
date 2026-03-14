@@ -201,3 +201,35 @@ In regard of the simulation, the decision if the VAST itself was to contain a gr
 :::
 
 # Appendix
+
+```{r}
+#| label: tbl-constructs
+#| tbl-cap: "Übersicht der untersuchten Konstrukte (formatiert mit papaja-Logik)"
+
+library(readr)
+library(dplyr)
+library(papaja)
+library(kableExtra)
+
+# 1. Daten einlesen und säubern (wie zuvor)
+raw_data <- read_delim("doc/construct_table.xlsx - Tabelle1.csv", 
+                       delim = ";", 
+                       show_col_types = FALSE)
+
+construct_data_clean <- raw_data %>%
+  rename(ID = 1) %>% 
+  filter(!grepl("^\\[source", ID), !grepl("^-", ID), !is.na(ID), ID != "") %>%
+  select(ID, `Short Name` = `Short name`, Quote, Reference)
+
+# 2. papaja-Style Tabelle mit kableExtra-Optimierung
+# Wir nutzen kable(), da es die Basis für apa_table ist, aber flexibler in Quarto
+kable(construct_data_clean, 
+      format = "latex", 
+      booktabs = TRUE, 
+      escape = FALSE) %>% # escape = FALSE erlaubt Sonderzeichen in Zitaten
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = FALSE) %>%
+  column_spec(3, width = "7cm") %>% # Quote-Spalte fixieren, damit Text umbricht
+  column_spec(4, width = "4cm")    # Reference-Spalte fixieren
+```
+

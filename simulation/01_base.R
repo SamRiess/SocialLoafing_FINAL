@@ -230,6 +230,9 @@ plot_p3 <- ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
 #' 
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
+#set a seed to get the same results every time 
+set.seed(324)
+
 get_super_IE <- function(CT, S, EMC) {
   LE <- get_LE(EMC)
   CON <- get_CON(CT) 
@@ -284,7 +287,7 @@ plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, color = as.factor(E
 #' @param MC maximum capacity to scream. Ranges from 0 to 15 (continuous)
 #' @param IE individual effort Ranges from 0 to 1 (continuous)
 #' 
-#' @return (IO) individual outcome. Ranges from 0 to inf. (continuous)
+#' @return (IO) individual output. Ranges from 0 to inf. (continuous)
 
 get_IO <- function(MC, IE) {
   IO <- MC * IE   
@@ -328,7 +331,7 @@ plot_t2 <- ggplot(plot_data_IO, aes(x = MC, y = IO)) +
 #' @param S number of people viewed as source of social pressure. Ranges from 0 to infinite (discrete)
 #' @param MC maximum capacity to scream. Ranges from 0 to 15 (continuous)
 #' 
-#' @return (IO) individual outcome. Ranges from 0 to inf (continuous)
+#' @return (IO) individual output. Ranges from 0 to inf (continuous)
 
 get_super_IO <- function(CT, S, MC, EMC){
   IO <- get_super_IE(CT, S, EMC) * MC 

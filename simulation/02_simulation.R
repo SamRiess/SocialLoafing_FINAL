@@ -6,7 +6,7 @@
 # As it is a deterministic model, any virtual participant
 # will have on average the same individual effort based on 
 # the number of Co-targets (CT) and Sources of Social Pressure (S)
-# (note: more input Data is generated for we have EMC as a predictor aswell, but this is only needed later on when we replicate Jackson & Harkins' research)
+# (note: more input Data is generated for we have EMC as a predictor as well, but this is only needed later on when we replicate Jackson & Harkins' research)
 
 # Variability comes into the experiment by:
 # (a) Different trait values for the maximum noise each person can produce
@@ -14,8 +14,8 @@
 #     fatigue, personality, mental state etc.  during the experiment
 
 # You can run the script repeatedly to simulate new replication studies
-# and observe the variability in outcomes due to sampling variability.
-# note: if you're planning this, make sure you don't execute the seed
+# and observe the variability in outputs due to sampling variability.
+# note: if you're planning this, make sure you don't execute the seed.
 
 #set seed if you want to get the same results as presented in our report
 set.seed(324)
@@ -51,14 +51,14 @@ mean(max_per_person$maximum)
 # merge into df
 df <- merge(df, max_per_person, by = "id")
 
-# compute the psychological outcome variable (IE)
+# compute the psychological output variable (IE)
 df$IE <- get_super_IE(
   CT = df$CT,
   S = df$S, 
   EMC = df$EMC
 )
 
-# compute the manifest outcome variable (IO)
+# compute the manifest output variable (IO)
 df$IO <- get_super_IO(
   CT = df$CT,
   S = df$S,
@@ -142,7 +142,7 @@ boxplot_latane
 
 # We use the same model as for the analysis of Latané et al, but now we're taking a closer look on the EMC conditions and their effects
 # we use all three conditions: the Number of Cotargets (CT), the Effort Matching condition (EMC) 
-# (which transforms into LE) and the sources of social impact (this is still fixed to 2, cause it wasn't varied in this research either)
+# (which transforms into LE) and the sources of social impact (S, this is still fixed to 2, cause it wasn't varied in this research either)
 
 # we have to replicate the table 1 of the Analysis and test to see if the 3 pairs of conditions (Alone vs. Pair, for each of the three LE conditions)
 # create significant p-values

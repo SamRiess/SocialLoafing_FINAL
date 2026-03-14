@@ -15,7 +15,7 @@
 
 # You can run the script repeatedly to simulate new replication studies
 # and observe the variability in outcomes due to sampling variability.
-# not: if you're planning this, make sure you don't execute the seed
+# note: if you're planning this, make sure you don't execute the seed
 
 #set seed if you want to get the same results as presented in our report
 set.seed(324)

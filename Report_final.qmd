@@ -49,8 +49,6 @@ source("simulation/01_base.R")
 source("simulation/02_simulation.R")
 ```
 
-# Introduction
-
 # Objective
 
 In this report, we formalize an existing psychological theory to test the relation between the emerging phenomena and the corresponding data by means of a computational model, based on the underlying theory. Following the methodological framework outlined by Borsdoom [@borsboom2021], we generate simulated data for a fictional experiment inspired by the original study in which the phenomenon was first described. We are mainly interested in replicating key empirical findings associated with the phenomenon and to demonstrate that the model is capable of reproducing the phenomenon across different hypothetical scenarios. The need for such work is grounded in broader concerns within psychological science, known under terms like "reproducibility crisis" (citation Borsboom). Hence, our aim is to take a closer look at the relationship between the underlying theory and the emerging phenomenon, evaluating how well the theoretical assumptions can account for the observed effects.
@@ -73,10 +71,8 @@ To create a link between this phenomenon and our formalization of the social imp
 
 ![Structure of the VAST phenomenon](doc/VAST_SocialLoafing_Phenomenon_image.png){#fig-vast fig-align="center" width="80%"}
 
-To address the robustness of social loafing and therefore the good reason for investigating it further, we part it into two sections: Strength of evidence and generalizability, using the UTOS framework. We get our overview for both sections mentioned in this article by analyzing a Meta-Analysis concerning social loafing [@karau1993]. We found quotes like "Both laboratory experiments and field studies have been conducted using a range of subject populations varying in age, gender, and culture". This leads to the assumption that at least the setting (S) and the Units (U) were varied over the years, for the meta-analysis conducts about 78 Studies. Others quotes like "Several studies provided data for more than one relevant dependent variable" are leading towards a given generalizability for the dimension of Outcomes (O) which is additionally supported by quotes like "used both within- and between-subjects comparisons of individuals' effort across coactive and collective conditions". This leads to the strong assumption that different operationaliations were used whilst investigating the phenomenon. Further both "physical or cognitive effort" were mentioned as different varieties of operationalisation.
-The strength of evidence can be acknowledged cause the effect sizes are estimated using mean effect sizes that "differed significantly from the 0.00 value that indicates exactly no difference". The most pregnant evidence can be found in the result section of that paper. Directly, the mean effect size was found to be d = .44 which was statistically significant (p < .001), presenting a moderate effect according to Cohen's general conventions. 
-
-In the end, the phenomenon can be considered robust because the whole UTOS framework and the strength of evidence are supported with empirical data.
+To address the robustness of social loafing and therefore the good reason for investigating it further, we part it into two sections: Strength of evidence and generalizability, using the UTOS framework. We get our overview for both sections mentioned in this article by analyzing a Meta-Analysis concerning social loafing [@karau1993]. We found quotes like "Both laboratory experiments and field studies have been conducted using a range of subject populations varying in age, gender, and culture". This leads to the assumption that at least the setting (S) and the Units (U) were varied over the years, for the meta-analysis conducts about 78 Studies. Others quotes like "Several studies provided data for more than one relevant dependent variable" are leading towards a given generalizability for the dimension of Outcomes (O) which is additionally supported by quotes like "used both within- and between-subjects comparisons of individuals' effort across coactive and collective conditions". This leads to the strong assumption that different operationalisations were used whilst investigating the phenomenon. Further both "physical or cognitive effort" were mentioned as different varieties of operationalisation and therefore the last dimension of UTOS (T - Treatment) can be considered fulfilled.
+The strength of evidence can be acknowledged cause the effect sizes are estimated using mean effect sizes that "differed significantly from the 0.00 value that indicates exactly no difference". The most pregnant evidence can be found in the result section of that paper. Directly, the mean effect size was found to be d = .44 which was statistically significant (p < .001), presenting a moderate effect according to Cohen's general conventions. In the end, the phenomenon can be considered robust because the whole UTOS framework and the strength of evidence are supported with empirical data.
 
 # Method
 
@@ -99,7 +95,7 @@ All our used variables for each of the constructs, if shown in our VAST, can be 
 
 ### Relationships
 
-The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. We aimed to write a function that is consistent with exact citations from the sources. Originally, the pressure can be lowered throughout the number of Co-Targets and Sources simultaneously. As we can see in the Graphs, the higher the Number of Sources is, the higher gets the felt impact on one subject. This represents the classic increase which is mentioned in c4. But with an increase of the number of Co-Targets, the impact lowered rapidly. Therefore, consistent with the general interpretation of social impact theory, felt impact is divided up among the group members (c5-c8).
+The relationship between the Co-Targets, Sources and the Pressure on the subject is presented in @fig-p2. We aimed to write a function that is consistent with exact citations from the sources. Originally, the pressure can be lowered throughout the number of Co-Targets and Sources simultaneously. As we can see in the Graphs, the higher the Number of Sources is, the higher gets the felt impact on one subject. This represents the classic increase which is mentioned in q4. But with an increase of the number of Co-Targets, the impact lowered rapidly. Therefore, consistent with the general interpretation of social impact theory, felt impact is divided up among the group members (q5-q8).
 
 ```{r}
 #| label: fig-p2
@@ -110,7 +106,7 @@ The relationship between the Co-Targets, Sources and the Pressure on the subject
 plot_p2
 ```
 
-The left path of our VAST (@fig-mechanism) is our main mechanism which produces the phenomenon in the end. It starts with the relationship between Co-Targets and the contingency which was rather intuitive, due to the specific function derived from the core report, verified with [@latané1979] and specifically in c1-c3. It is presented in @fig-p1.
+The left path of our VAST (@fig-mechanism) is our main mechanism which produces the phenomenon in the end. It starts with the relationship between Co-Targets and the contingency which was rather intuitive, due to the specific function derived from the core report, verified with [@latané1979] and specifically in q1-q3. It is presented in @fig-p1.
 
 ```{r}
 #| label: fig-p1
@@ -121,7 +117,7 @@ The left path of our VAST (@fig-mechanism) is our main mechanism which produces 
 plot_p1
 ```
 
-After that, the transformation for the Incentive can be represented by a proportional increase: Incentive gets the same values as the previously computed contingency (@fig-t1). This was not based on a focal theory, but we deviated that an incentive to give one's own full effort directly results from the depicted contingency, also proved with c14.
+After that, the transformation for the Incentive can be represented by a proportional increase: Incentive gets the same values as the previously computed contingency (@fig-t1). This was not based on a focal theory, but we deviated that an incentive to give one's own full effort directly results from the depicted contingency, also proved with q14.
 
 ```{r}
 #| label: fig-t1
@@ -132,7 +128,7 @@ After that, the transformation for the Incentive can be represented by a proport
 plot_t1
 ```
 
-Things were getting more interesting with the function that computes the resulting individual effort, using all previously computed and simulated input variables. Both paths of our own VAST meet together in this relationship. The plot can be viewed in @fig-p3, showing the first influence of our effort Matching condition aswell. I wrote a function which transforms the manifest effort-matching condition (EMC) into the latent construct of a loafing expectation (LE), named t3 and supported by c12/c13. If the subject takes action in the LE (low effort) or HE (high effort) condition, effort matching takes place and fixes individual effort to a previously fixed value for each condition. These two values for effort matching conditions can be chosen individually, but we made sure that its higher in the HE condition compared to the LE one. The blue graph shows the natural social loafing mechanism for the individual effort, based on no information whatsoever about the others effort. First, if the pressure is high, the function starts higher cause the subject feels more bound to the outcome. Secondly, with more incentive to give full effort the subject is getting higher values in the effort. We argue that, besides great pressure, the effort won't reach its maximum if the incentive to give full effort isn't maximized. The basic idea of the relationship is supported by c9-c11. We had to adjust the function to fit in our theory and model so P and IE had a range from 0-1.
+Things were getting more interesting with the function that computes the resulting individual effort, using all previously computed and simulated input variables. Both paths of our own VAST meet together in this relationship. The plot can be viewed in @fig-p3, showing the first influence of our effort Matching condition as well. I wrote a function which transforms the manifest effort-matching condition (EMC) into the latent construct of a loafing expectation (LE), named t3 and supported by q12/q13. If the subject takes action in the LE (low effort) or HE (high effort) condition, effort matching takes place and fixes individual effort to a previously fixed value for each condition. These two values for effort matching conditions can be chosen individually, but we made sure that its higher in the HE condition compared to the LE one. The blue graph shows the natural social loafing mechanism for the individual effort, based on no information whatsoever about the others effort. First, if the pressure is high, the function starts higher cause the subject feels more bound to the outcome. Secondly, with more incentive to give full effort the subject is getting higher values in the effort. We argue that, besides great pressure, the effort won't reach its maximum if the incentive to give full effort isn't maximized. The basic idea of the relationship is supported by q9-q11. We had to adjust the function to fit in our theory and model so P and IE had a range from 0-1.
 
 ```{r}
 #| label: fig-p3
@@ -143,7 +139,7 @@ Things were getting more interesting with the function that computes the resulti
 plot_p3
 ```
 
-The simulation-relevant relationship we have to show is the transformation of IE and MC into the individual Output (IO). As can be seen in @fig-t2, the more maximum capacity each subject has, the higher the value for the outcome is. That occurs because we defined IE as a percentage of 1 (e.g. 0.6 = 60%) which is offset against the maximum. Hence, with more effort, the outcome is increasing simultaneously. We concluded a interaction effect between MC and IE that accounts for the final value of one's own output. The transformation function was needed to compute the manifest outcome for each person (e.g. in c15) and the group means for our statistical analysis later on.
+The simulation-relevant relationship we have to show is the transformation of IE and MC into the individual Output (IO). As can be seen in @fig-t2, the more maximum capacity each subject has, the higher the value for the outcome is. That occurs because we defined IE as a percentage of 1 (e.g. 0.6 = 60%) which is offset against the maximum. Hence, with more effort, the outcome is increasing simultaneously. We concluded a interaction effect between MC and IE that accounts for the final value of one's own output. The transformation function was needed to compute the manifest outcome for each person (e.g. in q15) and the group means for our statistical analysis later on.
 
 ```{r}
 #| label: fig-t2
@@ -154,7 +150,7 @@ The simulation-relevant relationship we have to show is the transformation of IE
 plot_t2
 ```
 
-The behavior of the combined system is shown in (). It is pretty similar to the IE function but deviates in its own input variables. In this case, we used alle manifest ones and threw them into the whole psychological process that it labeled "Psyche" (see @fig-vast for clarification). The resulting "superfunction" can be described as followed: 
+The behavior of the combined system is shown in (). It is pretty similar to the IE function but deviates in its own input variables. In this case, we used all manifest ones and threw them into the whole psychological process that it labeled "Psyche" (see @fig-vast for clarification). The resulting "superfunction" can be described as followed: 
 
 ## Evaluation of the formal model
 

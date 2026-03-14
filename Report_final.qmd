@@ -5,6 +5,8 @@ format:
     documentmode: man
     a4paper: true
     pdf-engine: lualatex
+    header-includes:
+      - \usepackage{pdfpages}
     keep-tex: false
 editor: visual
 lang: en
@@ -61,7 +63,7 @@ We selected our social psychology theory  because it provides a framework of cle
 
 Our formalization is grounded on some core constructs. These are orientated at quotes we withdrawed directly from the existing research. Some constructs were specified differently over the whole report, so we aimed to label them in a way that serves a greater interpretation. Of course, these labels are our own understanding of the constructs, further researchers may focus on other elements. Furthermore, the scope is strongly limited to the main social loafing research, we only differ if a special need or cause occurred. The central social impact theory contains more than our chosen phenomenon so we were able to further limit the scope.
 
-All constructs and their sources can be seen in (table 1), our presented VAST model in @fig-mechanism contains them in a connected and graphic way to understand the underlying mechanism of the phenomenon. As one can see, the initial constructs that cause the effect are the Co-Targets (CT) and Sources (S) of social impact, which represent group members and e.g. experimenters who supervise the whole group in an experiment. Of course, the sources can be every kind of person that performs pressure or impact on a certain group or individual. On this note, it is worth mentioning that pressure and impact are not further separated so we're sticking with the definition "pressure" in this report, resulting in our construct P. Whilst P is influenced by CT and S simultaneously, the contingency between input and outcome is not. Only the CT have a certain influence in a way that this contingency decreases with the higher number of CT. This leads to the "incentive to work equally hard" [@latané1979]. These constructs are proportional but need to be separated for they define different steps in the process: the contingency can be interpreted as an objective mechanism in the Psyche, Incentive contains a motivational value. For our construct of individual Effort" (IE), it was influenced by the 2 constructs of the main mechanism, P and INC, but by our EMC condition too. This effort, which is declared directly in the research, leads to an individual group output, presenting a manifest and therefore measured variable. The MC was added later and isn't exactly part of the theory itself, but is crucial in our report to compute a simulation later on. The Effort matching condition (EMC) presents 3 experimental conditions: High effort, no information and low Effort. This construct isn't mentioned in @latané1979 and was therefore an extension from the Effort Matching research [@jackson1985]. We didn't include constructs like "identifiability" due to our strict limitation of scope and setting missing identifiability to "not given" cause it would've eliminated the whole mechanism as well.
+All constructs and their sources can be seen in (Table 1), our presented VAST model in @fig-mechanism contains them in a connected and graphic way to understand the underlying mechanism of the phenomenon. As one can see, the initial constructs that cause the effect are the Co-Targets (CT) and Sources (S) of social impact, which represent group members and e.g. experimenters who supervise the whole group in an experiment. Of course, the sources can be every kind of person that performs pressure or impact on a certain group or individual. On this note, it is worth mentioning that pressure and impact are not further separated so we're sticking with the definition "pressure" in this report, resulting in our construct P. Whilst P is influenced by CT and S simultaneously, the contingency between input and outcome is not. Only the CT have a certain influence in a way that this contingency decreases with the higher number of CT. This leads to the "incentive to work equally hard" [@latané1979]. These constructs are proportional but need to be separated for they define different steps in the process: the contingency can be interpreted as an objective mechanism in the Psyche, Incentive contains a motivational value. For our construct of individual Effort" (IE), it was influenced by the 2 constructs of the main mechanism, P and INC, but by our EMC condition too. This effort, which is declared directly in the research, leads to an individual group output, presenting a manifest and therefore measured variable. The MC was added later and isn't exactly part of the theory itself, but is crucial in our report to compute a simulation later on. The Effort matching condition (EMC) presents 3 experimental conditions: High effort, no information and low Effort. This construct isn't mentioned in @latané1979 and was therefore an extension from the Effort Matching research [@jackson1985]. We didn't include constructs like "identifiability" due to our strict limitation of scope and setting missing identifiability to "not given" cause it would've eliminated the whole mechanism as well.
 
 ## Identification of the relevant Phenomena
 
@@ -200,4 +202,15 @@ In regard of the simulation, the decision if the VAST itself was to contain a gr
 ::: {#refs}
 :::
 
-# Appendix
+\newpage
+\section{Appendix}
+\label{sec:appendix}
+
+```{r}
+#| echo: false
+#| results: "asis"
+
+# this chunk includes the Table.pdf file 
+# 'pages=-' means: all pages.
+cat("\\includepdf[pages=-]{doc/Tables.pdf}")
+```

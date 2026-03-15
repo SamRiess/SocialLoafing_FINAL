@@ -75,14 +75,14 @@ data_final <- df %>%
   summarise(means = mean(IO), .groups = "drop")
 
 
-plot_final <- ggplot(data_final, aes(x = CT, y = means, color = factor(EMC))) +
+plot_final <- ggplot(data_final, aes(x = CT, y = means, linetype = factor(EMC))) +
   geom_point(shape = 8) +
   labs(
     title = "Mean Individual Outcome (dyn/cm^2)", 
     subtitle = "Dependent on experimental group (S = 1)", 
     y = "Sound Pressure in dyn percm^2", 
     x = "conditions (Number of Cotargets)",
-    color = "EMC"
+    linetype = "EMC"
   ) +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
   theme_minimal() +

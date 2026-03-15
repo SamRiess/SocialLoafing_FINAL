@@ -99,7 +99,7 @@ All relationships are mentioned in Table 3 which the relevant quotes, labeled wi
 
 ```{r}
 #| label: fig-p2
-#| fig-cap: "Plot for the relationsship p2"
+#| fig-cap: "Plot for the relationship p2"
 #| echo: false
 #| warning: false
 
@@ -110,7 +110,7 @@ The left path of our VAST (@fig-mechanism) presents the main mechanism which pro
 
 ```{r}
 #| label: fig-p1
-#| fig-cap: "Plot for the relationsship p1"
+#| fig-cap: "Plot for the relationship p1"
 #| echo: false
 #| warning: false
 

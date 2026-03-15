@@ -33,7 +33,7 @@ mechanism}
 \ifnextchar[{\eatarg}{}
 
 
-\caption{\label{fig-p2}Plot for the relationsship p2}
+\caption{\label{fig-p2}Plot for the relationship p2}
 
 \centering{
 
@@ -48,7 +48,7 @@ mechanism}
 \ifnextchar[{\eatarg}{}
 
 
-\caption{\label{fig-p1}Plot for the relationsship p1}
+\caption{\label{fig-p1}Plot for the relationship p1}
 
 \centering{
 

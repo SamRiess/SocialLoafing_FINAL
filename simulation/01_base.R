@@ -34,13 +34,13 @@ plot_data_CON$CON <- get_CON(
 
 # (example) plot a visual graph for the p1-function
 plot_p1 <- ggplot(plot_data_CON, aes(x = CT, y = CON)) +
-  geom_point(size = 3) +
+  geom_point(shape = 8) +
   labs(title = "contingency between input and outcome", 
        subtitle = "Dependent on Cotargets", 
        y = "Contingency", 
        x = "Number of Cotargets") +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
-  theme_bw() +
+  theme_classic() +
   geom_line()
 
 
@@ -84,7 +84,7 @@ plot_p2 <-ggplot(plot_data_P, aes(x = CT, y = P)) +
   facet_wrap(~plot_data_P$S_label) +
   labs(title = "Pressure", subtitle = "Dependent on Cotargets", y = "Contingency (=Incentive)", x = "Number of Cotargets") +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
-  theme_bw() +
+  theme_classic() +
   geom_line()
 
 
@@ -121,7 +121,7 @@ plot_t1 <- ggplot(plot_data_INC, aes(x = CON, y = INC)) +
   labs(title = "incentive to give full effort", y = "Incentive", x = "Contingency") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(CON, digits = 2))) +
   scale_y_continuous(limits = c(0, 1), breaks = c(round(INC, digits = 2))) +
-  theme_bw() +
+  theme_classic() +
   geom_line()
 
 
@@ -207,17 +207,17 @@ plot_data_IE$IE <- get_IE(
 plot_data_IE$P_label <- paste("Pressure:", round(plot_data_IE$P, digits = 2))
 
 # (example) plot a visual graph for the p3-function
-plot_p3 <- ggplot(plot_data_IE, aes(x = INC, y = IE, color = LE, group = LE)) +
+plot_p3 <- ggplot(plot_data_IE, aes(x = INC, y = IE, linetype = LE, group = LE)) +
   geom_point(shape = 8) +
   facet_wrap(~P_label) +
   labs(title = "Individual effort", 
        subtitle = "Dependent on Pressure + Incentive", 
        y = "Individual effort", 
        x = "Incentive", 
-       color = "expectation (LE)") +
+       linetype = "expectation (LE)") +
   scale_x_continuous(limits = c(0, 1), breaks = c(round(INC, digits = 2))) +
   scale_y_continuous(limits = c(0, 1), breaks = c(round(IE, digits = 2))) +
-  theme_bw() +
+  theme_classic() +
   geom_line()
 
 
@@ -282,17 +282,17 @@ plot_data_super_IE$IE <- get_super_IE_withoutnoise(
 plot_data_super_IE$S_label <- paste("Sources:", plot_data_super_IE$S)
 
 # (example) plot a visual graph for the p3-function
-plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, color = as.factor(EMC), group = EMC)) +
+plot_super <- ggplot(plot_data_super_IE, aes(x = CT, y = IE, linetype = as.factor(EMC), group = EMC)) +
   geom_point(shape = 8) +
   facet_wrap(~S_label) +
   labs(title = "Individual effort", 
        subtitle = "Dependent on Cotargets + Sources", 
        y = "Individual effort", 
        x = "number of Co-Targets", 
-       color = "condition (EMC)") +
+       linetype = "condition (EMC)") +
   scale_x_continuous(limits = c(0, 5), breaks = c(0, 1, 5)) +
   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
-  theme_bw() +
+  theme_classic() +
   geom_line()
 
 
@@ -335,7 +335,7 @@ plot_t2 <- ggplot(plot_data_IO, aes(x = MC, y = IO)) +
   labs(title = "Individual outcome", subtitle = "Dependent on Maximum + Individual effort", y = "Individual outcome", x = "Individual Maximum") +
   scale_x_continuous(limits = c(min(MC), max(MC)), breaks = c(round(MC, digits = 2))) +
   scale_y_continuous(limits = c(min(plot_data_IO$IO), max(plot_data_IO$IO)), breaks = pretty(plot_data_IO$IO)) +
-  theme_bw() +
+  theme_classic() +
   geom_line()
 
 

@@ -123,7 +123,7 @@ boxplot_latane <- ggplot(df_Latane, aes(x = CT_factor, y = IO, fill = CT_factor)
   geom_boxplot(outlier.color = "red", alpha = 0.7) +
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") + # Zeigt den Mittelwert
   labs(
-    title = "distribution of Individual Outcomes (replication Latané)",
+    title = "distribution of Individual Outcomes (replication Latané et al., 1979)",
     subtitle = "Variability based on the CT-condition (EMC fixed to SLR)",
     x = "number of Co-Targets",
     y = "Sound Pressure (dyn/cm^2)"

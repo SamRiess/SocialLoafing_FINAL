@@ -246,6 +246,18 @@ get_super_IE <- function(CT, S, EMC) {
   return(IE)
 }
 
+get_super_IE_withoutnoise <- function(CT, S, EMC) {
+  LE <- get_LE(EMC)
+  CON <- get_CON(CT) 
+  P <- get_P(CT, S)
+  INC <- get_INC(CON)
+  IE <- get_IE(INC, P, LE)
+
+  IE[IE > 1] <- 1
+  IE[IE < 0] <- 0
+  return(IE)
+}
+
 # (example) check vectorized form
 IE <- get_super_IE(CT, S, EMC)
 IE
@@ -257,8 +269,10 @@ plot_data_super_IE <- expand.grid(
   EMC = EMC
 )
 
-# (example) compute the individual effort from CT, S and EMC
-plot_data_super_IE$IE <- get_super_IE(
+# (example) compute the individual effort from CT, S and EMC. Important to use the function wihtout noise for 
+#           demonstrating the behavior of the Psy-Box in the report. The simulation uses the function with 
+#           noise ofc.
+plot_data_super_IE$IE <- get_super_IE_withoutnoise(
   CT = plot_data_super_IE$CT,
   S = plot_data_super_IE$S, 
   EMC = plot_data_super_IE$EMC

@@ -240,7 +240,7 @@ get_super_IE <- function(CT, S, EMC) {
   INC <- get_INC(CON)
   IE <- get_IE(INC, P, LE)
   
-  IE <- IE + rnorm(length(IE), mean = 0, sd = 0.3)
+  IE <- IE + rnorm(length(IE), mean = 0, sd = 0.1)
   IE[IE > 1] <- 1
   IE[IE < 0] <- 0
   return(IE)

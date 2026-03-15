@@ -108,6 +108,21 @@ mechanism}
 \ifnextchar[{\eatarg}{}
 
 
+\caption{\label{fig-super}Plot for the resulting superfunction}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{Report_final_files/figure-pdf/fig-super-1.pdf}}
+
+}
+
+\end{figure*}
+\efloatseparator
+ 
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
 \caption{\label{fig-box1}Boxplot for the replication of Latané}
 
 \centering{

@@ -79,7 +79,7 @@ plot_final <- ggplot(data_final, aes(x = CT, y = means, linetype = factor(EMC)))
   geom_point(shape = 8) +
   labs(
     title = "Mean Individual Outcome (dyn/cm^2)", 
-    subtitle = "Dependent on experimental group (S = 1)", 
+    subtitle = "Dependent on experimental group (S = 2)", 
     y = "Sound Pressure in dyn percm^2", 
     x = "conditions (Number of Cotargets)",
     linetype = "EMC"

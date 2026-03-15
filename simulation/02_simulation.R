@@ -118,19 +118,22 @@ fit <- glht(fit_Latane, linfct = kontraste)
 confint(fit, level = 0.95, calpha = univariate_calpha())
 summary(fit, test = univariate())
 
-# descriptives: Boxplot
-boxplot_latane <- ggplot(df_Latane, aes(x = CT_factor, y = IO, fill = CT_factor)) +
-  geom_boxplot(outlier.color = "red", alpha = 0.7) +
-  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") + # Zeigt den Mittelwert
+# Descriptives: Boxplot
+boxplot_latane <- ggplot(df_Latane, aes(x = CT_factor, y = IO)) +
+  geom_boxplot(fill = "grey90", color = "black", outlier.shape = 1) + 
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") + 
   labs(
-    title = "distribution of Individual Outcomes (replication Latané et al., 1979)",
-    subtitle = "Variability based on the CT-condition (EMC fixed to SLR)",
-    x = "number of Co-Targets",
-    y = "Sound Pressure (dyn/cm^2)"
+    title = "Distribution of Individual Outcomes",
+    subtitle = "Replication: Latané et al. (1979)",
+    x = "Number of Co-Targets",
+    y = expression(paste("Sound Pressure (dyn/", cm^2, ")"))
   ) +
-  theme_minimal() +
-  scale_fill_brewer(palette = "Set2") +
-  theme(legend.position = "none")
+  theme_classic() + 
+  theme(
+    text = element_text(family = "sans", size = 12),
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(italic = TRUE, hjust = 0.5)
+  )
 
 boxplot_latane
 
@@ -196,18 +199,23 @@ p_high <- p_values_harkins[3]
 # execute a confidence interval for Harkins & Jackson (1985)
 confint_harkins <- confint(fit_final_harkins)
 
-#descriptives: Boxplot 
+# Descriptives: Boxplot 
 boxplot_harkins <- ggplot(df_harkins, aes(x = EMC_factor, y = IO, fill = CT_factor)) +
-  geom_boxplot(alpha = 0.8) +
+  geom_boxplot(color = "black", outlier.shape = 1) +
   labs(
-    title = "Individual Outcome: Alone vs. Pair, grouped by EMC-condition",
-    subtitle = "replication Jackson & Harkins (1985)",
+    title = "Individual Outcome: Alone vs. Pair",
+    subtitle = "Replication: Jackson & Harkins (1985)",
     x = "Effort Matching Condition (EMC)",
-    y = "Sound Pressure (dyn/cm^2)",
-    fill = "condition"
+    y = expression(paste("Sound Pressure (dyn/", cm^2, ")")),
+    fill = "Condition"
   ) +
-  theme_minimal() +
-  scale_fill_manual(values = c("Alone" = "#69b3a2", "Pair" = "#404080")) +
-  theme(legend.position = "top")
+  scale_fill_manual(values = c("Alone" = "white", "Pair" = "grey60")) + 
+  theme_classic() +
+  theme(
+    text = element_text(family = "sans", size = 12),
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(italic = TRUE, hjust = 0.5),
+    legend.position = "top"
+  )
 
 boxplot_harkins

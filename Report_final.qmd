@@ -1,5 +1,5 @@
 ---
-title: "Formal Modeling of the Social Impact theory applied to social loafing and the effort matching phenomena"
+title: "Formal Modeling of the Social Impact Theory applied to social loafing and the effort matching phenomena"
 format:
   apaquarto-pdf:
     documentmode: man
@@ -23,15 +23,14 @@ authors:
         name: "Ludwig-Maximilians-Universität München, Munich, Germany"
         department: "Department of Psychology"
 
-bibiography: Base_Literature/references.bib
 keywords: 
 - formalization 
-- Social impact theory 
-- social loafing
-- effort matching
+- Social Impact Theory 
+- Social Loafing
+- Effort Matching
 
 abstract: "insert abstract here later on"
-bibliography: references.bib
+bibliography: Base_Literature/references.bib
 ---
 
 ```{r setup}
@@ -46,18 +45,18 @@ library(ggplot2) # for the plotting and descriptives
 library(dplyr) # for smoother functions
 library(multcomp) # for the statistical analyses
 
-#if we source a R-document, it runs in advance and we get all created objects from that file aswell for that document/report
+#if we source a R-document, it runs in advance and we get all created objects from that file for that document/report
 source("simulation/01_base.R")
 source("simulation/02_simulation.R")
 ```
 
 # Objective
 
-In this report, we formalize an existing psychological theory to test the relation between the emerging phenomena and the corresponding data by means of a computational model, based on the underlying theory. Following the methodological framework outlined by @borsboom2021, we generate simulated data for a fictional experiment inspired by the original study in which the phenomenon was first described. We are mainly interested in replicating key empirical findings associated with the phenomenon and to demonstrate that the model is capable of reproducing the phenomenon across different hypothetical scenarios. The need for such work is grounded in broader concerns within psychological science, known under terms like "reproducibility crisis" [@oberauer2019]. Hence, our aim is to take a closer look at the relationship between the underlying theory and the emerging phenomenon, evaluating how well the theoretical assumptions can account for the observed effects.
+In this report, we formalize an existing psychological theory to test the relation between the emerging phenomena and the corresponding data by means of a computational model, based on the underlying theory. Following the methodological framework outlined by @borsboom2021, we generate simulated data for a fictional experiment inspired by the original study in which the phenomenon was first described. We are mainly interested in replicating key empirical findings associated with the phenomenon and to demonstrate that the model is capable of reproducing the phenomenon across different hypothetical scenarios. The need for such work is grounded in broader concerns within psychological science, known under terms like "reproducibility crisis" [@oberauer2019]. Hence, our aim is to take a closer look at the relationship between the underlying theory and the emerging phenomenon, while evaluating how well the theoretical assumptions can account for the observed effects.
 
 # Introduction of the theory
 
-We selected the Social Impact Theory because it provides a framework of clearly operationalized variables, allowing a precise measurement for input factors and their resultant phenomena. While the theory was firstintroduced in 1973, Latané published the full framework of mechanism and effects eight years later [@latané1981]. In the meantime, the foundational definition of 'social loafing' was introduced [@latané1979], using the tenets of the theory to explain the phemomenon. We added more depth in referring to an extending explanation of the mechanism, named 'Effort Matching' [@jackson1985].
+We selected the Social Impact Theory because it provides a framework of clearly operationalized variables, allowing a precise measurement for input factors and their resultant phenomena. While the theory was first introduced in 1973, Latané published the full framework of mechanism and effects eight years later [@latané1981]. In the meantime, the foundational definition of 'social loafing' was introduced [@latané1979], using the tenets of the theory to explain the phenomenon. We added more depth in referring to an extending explanation of the mechanism, named 'Effort Matching' [@jackson1985].
 
 ## Core constructs
 
@@ -67,7 +66,7 @@ All constructs and their sources can be seen in (Table 1), our presented VAST mo
 
 ## Identification of the relevant Phenomena
 
-In @latané1979, the resulting social loafing is described as followed: 'People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone'. The extending Effort Matching this phenomenon is defined in another research, stating: 'they will maintain equity by matching the effort levels they expect from their partners' [@jackson1985]. This was already discussed before [@latané1979] but further investigated in the newer research. The idea is that social loafing can be eliminated if the expectation to loaf, drawn to the effort of other group members, is held constant and therefore blocks the initial psychological process.
+In @latané1979, the resulting social loafing is described as follows: 'People exhibit a sizeable decrease in individual effort when performing in groups as compared to when they perform alone'. The extending Effort Matching this phenomenon is defined in another research, stating: 'they will maintain equity by matching the effort levels they expect from their partners' [@jackson1985]. This was already discussed before [@latané1979] but further investigated in the newer research. The idea is that social loafing can be eliminated if the expectation to loaf, drawn to the effort of other group members, is held constant and therefore blocks the initial psychological process.
 
 To create a link between this phenomenon and our formalization of the Social Impact Theory, we reapplied our visual framework. The manifestation of this phenomenon is illustrated in @fig-vast.
 
@@ -85,7 +84,7 @@ Throughout our formalization, we use the Visual Argument Structure Tool (VAST, [
 
 ## Formalization of the (Proto-)Theory
 
-In the process, it was crucial to limit our scope, referring to both theory and phenomenon. The main goal should be understandability, not the whole integrity of the full theory. We were limiting our scope to the following aspects: As noted earlier, we set the identifiability of the individual effort to non-existent. This can be justified for that the identifiability wasn't part of the experiments for social loafing [@latané1979], neither was it for effort matching [@jackson1985]. Further, we ignore the multiplicative connection between immediacy, strength and number of CT or S [@latané1981]. These weren't, again, part of previous research so we didn't focus on that specific part of social impact theory. A few more additional assumptions were crucial for our finalized theory and model to work. Other mentioned constructs like the default expectation for other peoples loafing wasn't specifically evaluated and included in both researches. We ought to deal with this in using the mechanism in the Psy box to generate a default expectation. With this approach, the underlying process gains more understandability while the high and low Effort condition (HE and LE) could be included into the superfunction for our psyche process without complicating the model itself. The extension of the maximum capacity was necessary for simulation purposes, it isn't mentioned in the theory itself either. Inclusion of MC was essential to operationalise a manifest variable IO as the primary output of the underlying psychological mechanism results in  percentage. This value requires a baseline representing 100% of potential output to remain measureable in our simulation. See Table 2 for further values. As we're introducing later in this report, these restrictions or extensions weren't loss-making for our Model and replication of the loafing effect and ARE therefore providing a post-hoc evaluation. Our resulting prototype theory which ought to explain the phenomenon is presented in @fig-mechanism. The "relationships" section shows each relationship and its justification, based on quotes from previous research (labeled with a "q" in Table 3) or our own assumptions and restrictions. In keeping this section short, I am mixing up the explanation of the model with its justification of the described relationships.
+In the process, it was crucial to limit our scope, referring to both theory and phenomenon. The main goal is understandability, not the whole integrity of the full theory. We were limiting our scope to the following aspects: As noted earlier, we set the identifiability of the individual effort to non-existent. This can be justified for that the identifiability wasn't part of the experiments for social loafing [@latané1979], neither was it for effort matching [@jackson1985]. Further, we ignore the multiplicative connection between immediacy, strength and number of CT or S [@latané1981]. These weren't, again, part of previous research so we didn't focus on that specific part of social impact theory. A few more additional assumptions were crucial for our finalized theory and model to work. Other mentioned constructs like the default expectation for other peoples loafing wasn't specifically evaluated and included in both researches. We ought to deal with this in using the mechanism in the Psy box to generate a default expectation. With this approach, the underlying process gains more understandability while the high and low Effort condition (HE and LE) could be included into the superfunction for our psyche process without complicating the model itself. The extension of the maximum capacity was necessary for simulation purposes, it isn't mentioned in the theory itself either. Inclusion of MC was essential to operationalise a manifest variable IO as the primary output of the underlying psychological mechanism results in  percentage. This value requires a baseline representing 100% of potential output to remain measureable in our simulation. See Table 2 for further values. As we're introducing later in this report, these restrictions or extensions weren't loss-making for our Model and replication of the loafing effect and ARE therefore providing a post-hoc evaluation. Our resulting prototype theory which ought to explain the phenomenon is presented in @fig-mechanism. The "relationships" section shows each relationship and its justification, based on quotes from previous research (labeled with a "q" in Table 3) or our own assumptions and restrictions. In keeping this section short, I am mixing up the explanation of the model with its justification of the described relationships.
 
 ![Structure of the VAST theory and mechanism](doc/VAST_SocialLoafing_Mechanism_Fallacy_image.png){#fig-mechanism fig-align="center" width="100%"}
 
@@ -163,7 +162,7 @@ plot_super
 
 # Evaluation of the formal model
 
-Finally, we got to test our model with our simulation. We simulated the original experiment for social loafing, using the sound pressure as the individual output [@latane1979] but added the EMC predictor, known in our theory by "Effort matching condition". With a sample size of n=36 (view @latane1979, we were able to test for the original effect and the effort matching mechanism in one sample). The descriptives for both analyses are showcased in @fig-box1 and @fig-box2. These are highly influenced by the noise term of p3 which can be adjusted freely, for the original research didn't provide such values. We chose the parameters mean = 0 and sd = 0.2 for our 'noise term' of that function, cause we assume that variability comes into the model throughout many sources: e.g. fatigue, personality or the current mental state.
+Finally, we got to test our model with our simulation. We simulated the original experiment for social loafing, using the sound pressure as the individual output [@latane1979] but added the EMC predictor, known in our theory by "Effort matching condition". With a sample size of n=36 (view @latané1979, we were able to test for the original effect and the effort matching mechanism in one sample). The descriptives for both analyses are showcased in @fig-box1 and @fig-box2. These are highly influenced by the noise term of p3 which can be adjusted freely, for the original research didn't provide such values. We chose the parameters mean = 0 and sd = 0.2 for our 'noise term' of that function, cause we assume that variability comes into the model throughout many sources: e.g. fatigue, personality or the current mental state.
 
 ```{r}
 #| label: fig-box1
@@ -188,7 +187,7 @@ boxplot_harkins
 latane_anova <- apa_print(fit_Latane)
 ```
 
-Due to our 2 computed ANOVAS which rely on the same sample, we needed to adjust our p-value with the Bonferroni method. Thus, the new $\alpha$-niveau comes down to .025. It turns out that both effects, on one side the social loafing but on the other the elimination of this phenomenon throughout implementing a low and high Effort condition were supported by our present simulation and therefore our model. In proving the results, we fall back on the original analysis [@latané1979] for which all resulting graphs can be viewed in @fig-final. The main replication was significant for the number of Co-Targets had a significant effect on the individual sound output `r latane_anova$full_result$CT_factor`. This is consistent with the findings of @latané1979 and proves that our model is capable of producing the main phenomenon. Whilst replicating the findings of effort matching [@jackson1985], I compared all three pairs of 'Alone vs. Group', each for one condition of EMC. Only in the SLR-condition, I detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, equal results appeared in the the high effort condition with p=`r printp(p_high)`. Therefore, I've shown that Effort Matching emerged via our model and is consistent with the literature in eliminating the social loafing effect thoroughly holding the loafing expectation constant.
+Due to our 2 computed ANOVAS which rely on the same sample, we needed to adjust our p-value with the Bonferroni method. Thus, the new $\alpha$-level comes down to .025. It turns out that both effects, on one side the social loafing but on the other the elimination of this phenomenon throughout implementing a low and high Effort condition were supported by our present simulation and therefore our model. In proving the results, we fall back on the original analysis [@latané1979] for which all resulting graphs can be viewed in @fig-final. The main replication was significant for the number of Co-Targets had a significant effect on the individual sound output `r latane_anova$full_result$CT_factor`. This is consistent with the findings of @latané1979 and proves that our model is capable of producing the main phenomenon. Whilst replicating the findings of effort matching [@jackson1985], I compared all three pairs of 'Alone vs. Group', each for one condition of EMC. Only in the SLR-condition, I detected a significant decrease in the outcome between the group and alone situation (p `r printp(p_slr)`). For the low effort condition the difference was no longer significant with p=`r printp(p_low)`, equal results appeared in the the high effort condition with p=`r printp(p_high)`. Therefore, I've shown that Effort Matching emerged via our model and is consistent with the literature in eliminating the social loafing effect thoroughly holding the loafing expectation constant.
 
 ```{r}
 #| label: fig-final

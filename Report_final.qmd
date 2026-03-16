@@ -75,7 +75,7 @@ To address the robustness of social loafing and justify the need for further inv
 
 # Method
 
-All documents used in the process of writing this report can be found and downloaded from the GitHub repository: https://github.com/SamRiess/SocialLoafing_FINAL.git. The working Google Doc which contains all tables is linked here: https://docs.google.com/document/d/1uyZClUMjVYVrUacyiwE5CBqVdFDZlJFDtxe1ZKb-B74/edit?usp=sharing. This report refers to version number v1.0.0. See the .cff file for further information.
+All documents used in the process of writing this report can be found and downloaded from the GitHub repository: https://github.com/SamRiess/SocialLoafing_FINAL.git. The working Google Doc which contains all tables is linked here: https://docs.google.com/document/d/1uyZClUMjVYVrUacyiwE5CBqVdFDZlJFDtxe1ZKb-B74/edit?usp=sharing.
 
 ## used software
 

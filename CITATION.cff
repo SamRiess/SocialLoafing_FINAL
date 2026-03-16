@@ -1,0 +1,55 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: R
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Samuel
+    family-names: Riess
+    email: Samuel.riess@campus.lmu.de
+  - given-names: Mira
+    family-names: Speier
+    email: m.speier@campus.lmu.de
+  - given-names: 'Leonie '
+    family-names: Feltesse
+    email: l.feltesse@campus.lmu.de
+  - given-names: Marina
+    family-names: Liegsalz
+    email: marina.liegsalz@campus.lmu.de
+abstract: >-
+  In light of the replication crisis, precise links between
+  theories and their emerging phenomena are becoming
+  increasingly relevant for the psychological research
+  community. With this research, we aim to test the
+  connection between the existing Social Impact Theory and
+  one of its emergent phenomena, the Social Loafing effect.
+  Further, Effort Matching as an extending mechanism was
+  observed to generate a broader perspective. Throughout our
+  formalization, we used the Visual Argument Structure Tool
+  to reshape the verbal tenets into a graphic illustration
+  which contains all relevant identifiable constructs of the
+  theory. The resulting mathematical model contained several
+  extensions and restrictions, driven by the goal to design
+  a self-consistent framework and  by the need to address
+  inconsistencies in previous research. Whilst simulating
+  data for a fictional experimental design, we provided
+  support for the model and therefore the Social Impact
+  Theory itself. This leads to a logical conclusion that
+  Social Loafing and Effort Matching emerge directly from
+  its theoretical foundation, proving that this specific
+  connection between theory and phenomenon requires no
+  substantial modification.
+keywords:
+  - Theory Formalization
+  - Social Impact Theory
+  - 'Social Loafing '
+  - 'Effort Matching '
+  - Visual Argument structure Tool (VAST)
+license: CC-BY-4.0
+commit: Handed in the First Version
+version: 1.0.0
+date-released: '2026-03-16'

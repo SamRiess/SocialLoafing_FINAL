@@ -105,20 +105,20 @@ df_Latane$CT_factor <- factor(df_Latane$CT,
 
 fit_Latane <- aov(IO ~ CT_factor, data = df_Latane)
 
-#define the hypothesis
+# define the hypothesis
 hyp1 <- "CT1 - CT5 <= 0"
 hyp2 <- "CT0 - CT1 <= 0"
 hyps_Latane <- c(hyp1, hyp2)
 
 kontraste <- mcp(CT_factor = hyps_Latane)
 
-#execute the ANOVA
+# execute the ANOVA
 fit <- glht(fit_Latane, linfct = kontraste)
 
 confint(fit, level = 0.95, calpha = univariate_calpha())
 summary(fit, test = univariate())
 
-# Descriptives: Boxplot
+# descriptives: boxplot
 boxplot_latane <- ggplot(df_Latane, aes(x = CT_factor, y = IO)) +
   geom_boxplot(fill = "grey90", color = "black", outlier.shape = 1) + 
   stat_summary(fun = mean, geom = "point", shape = 18, size = 3, color = "black") + 
@@ -141,7 +141,7 @@ boxplot_latane
 
 ## Replicate Jackson & Harkins (1985)
 
-#statistical Analysis for the replication of the Harkins & Jackson Findings - comparison between groups of 1 and 2 persons, computed for every condition of EMC
+# statistical Analysis for the replication of the Harkins & Jackson Findings - comparison between groups of 1 and 2 persons, computed for every condition of EMC
 
 # We use the same model as for the analysis of Latané et al, but now we're taking a closer look on the EMC conditions and their effects
 # we use all three conditions: the Number of Cotargets (CT), the Effort Matching condition (EMC) 
@@ -157,12 +157,12 @@ df_harkins <- subset(df, CT %in% c(0,1))
 # look at the simulated data subset 
 # View(df_harkins)
 
-#define the CT-factor
+# define the CT-factor
 df_harkins$CT_factor <- factor(df_harkins$CT,
                                levels = c(0, 1),
                                labels = c("Alone", "Pair"))
 
-#define the LE-factor
+# define the LE-factor
 df_harkins$EMC_factor <- factor(df_harkins$EMC,
                                 levels = c(1, 2, 3),
                                 labels = c("Low", "SLR", "High"))
@@ -170,15 +170,15 @@ df_harkins$EMC_factor <- factor(df_harkins$EMC,
 fit_harkins <- aov(IO ~ CT_factor * EMC_factor, data = df_harkins)
 summary(fit_harkins)
 
-#testing each pair between 0 and 1 Co-targets for each EMC condition
+# testing each pair between 0 and 1 Co-targets for each EMC condition
 
-#preparation: create a combined group for contrasts
+# preparation: create a combined group for contrasts
 df_harkins$group <- interaction(df_harkins$CT_factor, df_harkins$EMC_factor)
 
-#new model, based on the new groups
+# new model, based on the new groups
 fit_harkins_uni <- aov(IO ~ group, data = df_harkins)
 
-#define a hypothesis for each pair
+# define a hypothesis for each pair
 hyp_low    <- "Alone.Low - Pair.Low = 0"
 hyp_noinfo <- "Alone.SLR - Pair.SLR = 0"
 hyp_high   <- "Alone.High - Pair.High = 0"
@@ -187,7 +187,7 @@ hyps_harkins <- c(hyp_low, hyp_noinfo, hyp_high)
 kontraste_harkins <- mcp(group = hyps_harkins)
 fit_final_harkins <- glht(fit_harkins_uni, linfct = kontraste_harkins)
 
-#show results
+# show results
 summary_harkins <- summary(fit_final_harkins, test = univariate())
 p_values_harkins <- summary_harkins$test$pvalues
 
@@ -199,7 +199,7 @@ p_high <- p_values_harkins[3]
 # execute a confidence interval for Harkins & Jackson (1985)
 confint_harkins <- confint(fit_final_harkins)
 
-# Descriptives: Boxplot 
+# descriptives: boxplot 
 boxplot_harkins <- ggplot(df_harkins, aes(x = EMC_factor, y = IO, fill = CT_factor)) +
   geom_boxplot(color = "black", outlier.shape = 1) +
   labs(

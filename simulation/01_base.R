@@ -95,7 +95,7 @@ plot_p2 <-ggplot(plot_data_P, aes(x = CT, y = P)) +
 #' 
 #' @return (INC) incentive to give full effort. Ranges from 0 to 1 (continuous)
 
-#define the social loafing replication condition
+# define the social loafing replication condition
 
 get_INC <- function(CON) {
   INC = CON
@@ -165,7 +165,7 @@ get_IE <- function(INC, P, LE) {
   loafing_effort <- 0.5 * INC + 0.5 * P
   
   # the effort matching logic
-  # we're definign fix values which represent the expectation for the "alone"-
+  # we're defining fix values which represent the expectation for the "alone"-
   # condition of other subjects (independent of the current group size)
   final_IE <- case_when(
     # condition: co-Target is not loafing in its "alone"-condition
@@ -174,7 +174,7 @@ get_IE <- function(INC, P, LE) {
     # condition: Co-Target is loafing in its "alone"-condition
     LE == "match_low"  ~ 0.4, 
     
-    # In der no_info Bedingung greift das klassische Modell (Loafing)
+    # this is the social loafing replication condition SLR which results in the core mechanism 
     LE == "no_info"    ~ loafing_effort,
     
     TRUE                ~ loafing_effort
@@ -230,7 +230,7 @@ plot_p3 <- ggplot(plot_data_IE, aes(x = INC, y = IE, linetype = LE, group = LE))
 #' 
 #' @return (IE) individual effort. Ranges from 0 to 1 (continuous)
 
-#set a seed to get the same results every time 
+#set a seed to get the same results every time you run the Quarto script 
 set.seed(324)
 
 get_super_IE <- function(CT, S, EMC) {
@@ -269,9 +269,9 @@ plot_data_super_IE <- expand.grid(
   EMC = EMC
 )
 
-# (example) compute the individual effort from CT, S and EMC. Important to use the function wihtout noise for 
+# (example) compute the individual effort from CT, S and EMC. Important to use the function without noise for 
 #           demonstrating the behavior of the Psy-Box in the report. The simulation uses the function with 
-#           noise ofc.
+#           noise
 plot_data_super_IE$IE <- get_super_IE_withoutnoise(
   CT = plot_data_super_IE$CT,
   S = plot_data_super_IE$S, 
@@ -339,7 +339,7 @@ plot_t2 <- ggplot(plot_data_IO, aes(x = MC, y = IO)) +
   geom_line()
 
 
-#' Superfunction - compute the individual outcome  (through all the previous functions)
+#' Superfunction - compute the individual outcome  (using all the previous functions)
 #' 
 #' @param CT number of people who are also viewed as targets of social pressure. Ranges from 0 to infinite (discrete)
 #' @param S number of people viewed as source of social pressure. Ranges from 0 to infinite (discrete)
@@ -352,7 +352,7 @@ get_super_IO <- function(CT, S, MC, EMC){
   return (IO)
 }
 
-# note: we dont need plots for this superfunctions, cause it is shown in the "Evaluation" section later on.
+# note: we don't need plots for this superfunctions, cause it is shown in the "Evaluation" section later on.
 # note2: this applies for a check of vectorized forms too... we did that earlier in checking the isolated functions.
 
 # the final simulation for this model can be seen in 02_simulation.R 
